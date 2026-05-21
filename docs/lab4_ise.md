@@ -284,7 +284,7 @@ Log in with `admin` / `C1sco12345`.
 3. Navigate to **Work Centers → TrustSec → TrustSec Policy → Egress Policy → Matrix**. Confirm the four matrix entries are in place.
 4. Navigate to **Administration → Network Resources → Network Devices**. Confirm `BORDER`, `FIAB`, and the cEdge devices are registered.
 
-![ISE TrustSec Matrix](./assets/ise_matrix.png)
+<!-- ![ISE TrustSec Matrix](./assets/ise_matrix.png) -->
 
 ## Understanding the CI/CD Pipeline
 

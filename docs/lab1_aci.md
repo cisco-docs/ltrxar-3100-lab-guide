@@ -43,8 +43,6 @@ Open a Remote Desktop Protocol (RDP) session to the Windows VM:
 - **Username:** `admin`
 - **Password:** `C1sco12345`
 
-![RDP Connection](./assets/rdp_open.png)
-
 Once connected, start **Visual Studio Code** from the taskbar or Start menu.
 
 Open a new terminal: **Terminal → New Terminal**.
@@ -252,7 +250,7 @@ Create a new project:
 5. **Uncheck** "Initialize repository with a README"
 6. Click **Create project**
 
-![GitLab New Project](./assets/gitlab_new_project.png)
+![GitLab New Project](./assets/gitlab_new_project_aci.png)
 
 The project URL will be: `http://198.18.128.50/md-as-code/ltrxar-3100-aci`
 
@@ -293,7 +291,7 @@ The pipeline starts automatically when code is pushed to the `master` branch. Yo
 | **test** | `test-integration` | Runs post-deploy compliance checks against the APIC |
 | **notify** | `success` / `failure` | Sends a Webex notification with the pipeline result |
 
-![Pipeline View](./assets/gitlab_pipeline.png)
+![Pipeline View](./assets/gitlab_pipeline_aci.png)
 
 Wait for the **validate** and **plan** stages to complete (green checkmarks). Click the **plan** job to review the Terraform plan output — you should see 47 resources to be added.
 

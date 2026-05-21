@@ -15,7 +15,7 @@ Net-as-Code is Cisco's opinionated approach to managing network infrastructure u
 
 Each module accepts **YAML data files** as its only input. You describe *what* you want the network to look like; the module handles *how* to get there via the provider API.
 
-![Net-as-Code Architecture](./assets/introduction.png)
+![Net-as-Code Architecture](./assets/nac_architecture.png)
 
 ## The Data / Logic Separation
 
@@ -66,12 +66,14 @@ To add a second area, you add one entry to the YAML file and run `terraform appl
 Every domain in this lab follows the same five-step workflow:
 
 ```
-  1. Design      →  Define the desired network state in YAML
-  2. Validate    →  Lint YAML, run schema checks (pytest)
-  3. Plan        →  terraform plan  (show what will change)
-  4. Deploy      →  terraform apply  (apply changes to the controller)
-  5. Verify      →  Post-change compliance checks
+  1. Validate    →  Lint YAML, run schema checks (nac-validate)
+  2. Plan        →  terraform plan  (show what will change)
+  3. Deploy      →  terraform apply  (apply changes to the controller)
+  4. Test        →  Post-change compliance checks (nac-test)
+  5. Notify      →  Send Webex notification
 ```
+
+> **Note:** some of the repositories may have an additional `destroy` step to clean up the resources after the test is complete. For production environments, it is recommended to modify the `*.nac.yaml` files to remove the resources and trigger the pipeline. The apply process will in-turn trigger the destroy process to clean up the resources.
 
 ![Net-as-Code Workflow](./assets/nac_workflow.png)
 

@@ -36,8 +36,8 @@ After completing this lab, you will be able to:
   │                  SD-WAN Overlay (VPN 30)               │
   │              Transit AS 65200                          │
   │                                                        │
-  │  C-EDGE-01 (Site 2)        C-EDGE-02 (Site 3)         │
-  │  VLAN 3050 ↔ FIAB          VLAN 3010 ↔ BORDER         │
+  │  C-EDGE-01 (Site 2)        C-EDGE-02 (Site 3)          │
+  │  VLAN 3050 ↔ FIAB          VLAN 3010 ↔ BORDER          │
   │  10.100.50.2/30            10.100.30.2/30              │
   └────────────────────────────────────────────────────────┘
 ```
@@ -325,7 +325,7 @@ Wait for the CATC child pipeline to complete, then:
 2. Drill into the child pipeline
 3. Click the **play button (▶)** next to the `deploy` job
 
-![Orchestrator Pipeline](./assets/multidomain_pipeline.png)
+<!-- ![Orchestrator Pipeline](./assets/multidomain_pipeline.png) -->
 
 ## Step 9: Verify the Multi-Domain Integration
 
@@ -366,7 +366,7 @@ In the APIC GUI (`https://198.18.133.200`), navigate to **Tenants → PROD → N
 
 The BGP peer `10.100.10.2` will show as `Idle` — this is expected in the simulator because the physical link between LEAF102 and C-EDGE-02 is not simulated. In a real deployment, this peer would establish and exchange routes between the ACI fabric and SD-WAN VPN30.
 
-![Multi-Domain Topology](./assets/multidomain_topology.png)
+<!-- ![Multi-Domain Topology](./assets/multidomain_topology.png) -->
 
 ## Step 10: Simulate an End-to-End Policy Change
 

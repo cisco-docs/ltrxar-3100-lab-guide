@@ -1,6 +1,6 @@
 # Overview
 
-![LTRXAR-3100 Lab Logo](./assets/logo.png)
+![LTRXAR-3100 Lab Logo](./assets/ltrxar_3100_logo.png)
 
 ## Learning Objectives
 
@@ -65,8 +65,6 @@ From your local machine, open a Remote Desktop Protocol (RDP) session to the Win
 - **IP:** `198.18.133.10`
 - **Username:** `admin`
 - **Password:** `C1sco12345`
-
-![RDP Connection](./assets/rdp_open.png)
 
 The Windows VM serves as your jump station for all subsequent steps. Visual Studio Code, Git, Terraform, and a browser are pre-installed and pre-configured.
 

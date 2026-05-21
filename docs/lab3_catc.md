@@ -335,7 +335,7 @@ Log in with `admin` / `C1sco12345`.
 4. Click `Bld A` → **Virtual Networks**. Confirm the `Campus` VN with `VLAN_EMPLOYEES` and `VLAN_SERVERS` anycast gateways.
 5. Navigate to **Provision → Inventory**. Confirm devices appear with their fabric role assignments.
 
-![Catalyst Center Fabric](./assets/catc_fabric.png)
+<!-- ![Catalyst Center Fabric](./assets/catc_fabric.png) -->
 
 ## Understanding the CI/CD Pipeline
 
