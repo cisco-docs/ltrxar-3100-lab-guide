@@ -9,7 +9,7 @@ Net-as-Code is Cisco's opinionated approach to managing network infrastructure u
 | Module | Controller | Terraform Registry |
 |---|---|---|
 | `nac-aci` | Cisco ACI (APIC) | `netascode/nac-aci/aci` |
-| `nac-sdwan` | Cisco SD-WAN | `netascode/terraform-sdwan-nac-sdwan` |
+| `nac-sdwan` | Cisco SD-WAN | `netascode/nac-sdwan/sdwan` |
 | `nac-catalystcenter` | Catalyst Center | `netascode/nac-catalystcenter/catalystcenter` |
 | `nac-ise` | Cisco ISE | `netascode/nac-ise/ise` |
 
@@ -77,7 +77,7 @@ Every domain in this lab follows the same five-step workflow:
 
 ![Net-as-Code Workflow](./assets/nac_workflow.png)
 
-Steps 2 through 5 are automated in a CI/CD pipeline (Jenkins or GitLab CI) triggered by a Git push. This means a network change goes through the same pull-request and pipeline gates as a software change.
+Steps 1 through 5 are automated in a CI/CD pipeline (Jenkins or GitLab CI) triggered by a Git push. This means a network change goes through the same pull-request and pipeline gates as a software change.
 
 ## Repository Structure
 
@@ -127,10 +127,10 @@ By the end of this lab, you will have configured an end-to-end multi-domain poli
                             IoT Pool / Cameras
 
   [ISE TrustSec]
-  SGT: Employees=10  Servers=20  Cameras=30
-  Policy: Employees→Servers: PERMIT-ANY
-          Employees→Cameras: PERMIT-CAMERA-STREAM
-          Default: DENY-IP-LOG
+  SGT: IT_Admin=40  Servers=20  Cameras=30
+  Policy: IT_Admin→Servers: PERMIT_ANY
+          IT_Admin→Cameras: PERMIT_CAMERA_STREAM
+          Default: LTRXAR_DENY_IP_LOG
 ```
 
 All of this is driven from YAML data files checked into Git, deployed through a CI/CD pipeline, and enforced by post-change compliance checks.

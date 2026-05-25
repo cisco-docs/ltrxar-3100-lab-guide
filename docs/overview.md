@@ -72,6 +72,15 @@ The Windows VM serves as your jump station for all subsequent steps. Visual Stud
 
 Confirm that the RDP session opens successfully before proceeding.
 
+> **IMPORTANT:** Once you log into the RDP session, open the Chrome browser and navigate to https://198.18.128.27 (or click on the CML bookmark on the browser) to access the Cisco Modeling Lab. Log in using the following credentials:
+> 
+> | Device Name | URL | Username	| Password |
+> |-------------|-----------------|-----------| ----------|
+> | *Cisco Modeling Lab* | [https://198.18.128.27](https://198.18.128.27) | ```admin``` | ```C1sco12345``` |
+>
+> If the CML lab is not powered in, click on the triangle icon to power it on. By the time you start pushing the configuration to the CML lab, it will be powered on.
+
+
 ## Getting Started
 
 If you are not aware of it, as an option, read through the [Introduction](introduction.md) to understand the Net-as-Code methodology before starting the labs. Additional documentation is available on the [Net-as-Code website](https://netascode.cisco.com/).

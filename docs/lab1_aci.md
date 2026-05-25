@@ -252,27 +252,59 @@ Create a new project:
 
 ![GitLab New Project](./assets/gitlab_new_project_aci.png)
 
-The project URL will be: `http://198.18.128.50/md-as-code/ltrxar-3100-aci`
+Once the project is created, click on the `Code` button and copy the URL displayed under `Clone with HTTP` by clicking the `Copy URL` icon. 
+
+![GitLab Code Button](./assets/gitlab_code_button_http.png)
+
+The project URL will be: `http://198.18.128.50/md-as-code/ltrxar-3100-aci.git`
 
 > **Note:** CI/CD variables (ACI credentials, GitLab token) are pre-configured at the **group level** (`md-as-code`) in this lab environment. You do not need to set them manually for individual projects.
 
 ## Step 6: Push to GitLab
 
-Back in the VS Code terminal, add the GitLab instance as a second remote and push the repository:
+Back in the VS Code terminal, first, lets check the remotes of the repository by issuing following command:
+
+```bash
+git remote -v
+```
+
+You should see the following output:
+
+```bash
+origin  https://github.com/cisco-docs/ltrxar-3100-aci.git (fetch)
+origin  https://github.com/cisco-docs/ltrxar-3100-aci.git (push)
+```
+Now, add the GitLab instance as a second remote and push the repository:
+
+```bash
+git remote add gitlab <PROJECT_URL>
+```
+For example:
 
 ```bash
 git remote add gitlab http://198.18.128.50/md-as-code/ltrxar-3100-aci.git
 git push gitlab master
 ```
 
-When prompted for credentials, enter:
+When prompted for credentials, in the top search bar enter:
 - **Username:** `labuser`
 - **Password:** `C1sco12345`
 
-```
-Enumerating objects: 42, done.
-Counting objects: 100% (42/42), done.
-Writing objects: 100% (42/42), 18.3 KiB | 1.43 MiB/s, done.
+**Expected output:**
+You may see certificate warnings and a message about unencrypted HTTP. This is expected and can be ignored.
+```console
+fatal: Unencrypted HTTP is not supported for GitHub. Ensure the repository remote URL is using HTTPS.
+warning: ----------------- SECURITY WARNING ----------------
+warning: | TLS certificate verification has been disabled! |
+warning: ---------------------------------------------------
+warning: HTTPS connections may not be secure. See https://aka.ms/gcm/tlsverify for more information.
+Enumerating objects: 15135, done.
+Counting objects: 100% (15135/15135), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (4554/4554), done.
+Writing objects: 100% (15135/15135), 8.10 MiB | 3.98 MiB/s, done.
+Total 15135 (delta 9919), reused 15135 (delta 9919), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (9919/9919), done.
 To http://198.18.128.50/md-as-code/ltrxar-3100-aci.git
  * [new branch]      master -> master
 ```
@@ -293,11 +325,11 @@ The pipeline starts automatically when code is pushed to the `master` branch. Yo
 
 ![Pipeline View](./assets/gitlab_pipeline_aci.png)
 
-Wait for the **validate** and **plan** stages to complete (green checkmarks). Click the **plan** job to review the Terraform plan output — you should see 47 resources to be added.
+Wait for the **validate** and **plan** stages to complete (green checkmarks). Click the **plan** job to review the Terraform plan output — you should see around 200+ resources to be added.
 
 ## Step 8: Trigger the Deploy
 
-The `deploy` job is set to `when: manual` — it requires a deliberate click to prevent accidental changes.
+The `deploy` job is set to `when: manual` — it requires a deliberate click to prevent accidental changes. In production environment, this job might be set to run automatically after the plan is approved.
 
 In the pipeline view, click the **play button (▶)** next to the `deploy` job.
 
@@ -323,7 +355,7 @@ Log in with `admin` / `C1sco12345`.
 3. Navigate to **Tenants → PROD → Application Profiles → PROD → Application EPGs**. Confirm `EPG-Servers` and `EPG-Web` exist.
 4. Navigate to **Tenants → PROD → Networking → L3Outs → L3OUT-SDWAN-PROD**. Confirm the L3Out exists with the BGP peer on LEAF102.
 
-> **Expected:** The BGP peer `10.100.10.2` will show as `Idle`. This is correct — the SD-WAN edge is not yet connected. You will complete the BGP adjacency in Lab 5.
+> **Expected:** The BGP peer `10.100.10.2` will show as `Idle`. This is expected since the ACI is run in simulation mode and has no data plane. 
 
 **Verify access policies:**
 
@@ -428,7 +460,9 @@ git commit -m "Add EPG-Mgmt to PROD application profile"
 git push gitlab master
 ```
 
-A new pipeline run starts automatically. The **plan** stage will show exactly one resource to add (`EPG-Mgmt`) without touching any existing objects. Trigger the **deploy** job and verify the new EPG appears in the APIC GUI under **Tenants → PROD → Application Profiles → PROD**.
+A new pipeline run starts automatically. The **plan** stage will show exactly one resource to add (`EPG-Mgmt`) without touching any existing objects. Trigger the **deploy** job and verify the new EPG appears in the APIC GUI under **Tenants → PROD → Application Profiles → PROD → Application EPGs**.
+
+![EPG-Mgmt in APIC GUI](./assets/aci_ui_day2_change.png)
 
 ## Summary
 
