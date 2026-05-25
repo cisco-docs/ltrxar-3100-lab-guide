@@ -33,9 +33,14 @@ If you have closed the RDP session from Lab 1, reconnect:
 - **Username:** `admin`
 - **Password:** `C1sco12345`
 
-Open **Visual Studio Code** and open a new terminal: **Terminal → New Terminal**.
+> **Housekeeping:** There might be a case where once your SDWAN Manager is accessible, the 2 site routers might already be associated with the `edge_basic` configuration group. If that is the case, you can remove the routers from the `edge_basic` configuration group by navigating to `Configuration > Configuration Groups > Edge Basic > remove both routers from deploy` and click on `save`. This will allow you to deploy SDWAN as code without any errors.
+>
+> ![SDWAN Manager Configuration Groups](./assets/sdwan_manager_configuration_groups.png)
+
 
 ## Step 2: Clone the Repository
+
+Open **Visual Studio Code** and open a new terminal: **Terminal → New Terminal**.
 
 Clone the SD-WAN as Code repository from GitHub:
 

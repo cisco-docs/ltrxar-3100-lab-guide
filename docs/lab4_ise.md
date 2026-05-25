@@ -235,18 +235,66 @@ Create a new project:
 5. **Uncheck** "Initialize repository with a README"
 6. Click **Create project**
 
+
+
+![GitLab ISE Project](./assets/gitlab_new_project_ise.png)
+
+Once the project is created, click on the `Code` button and copy the URL displayed under `Clone with HTTP` by clicking the `Copy URL` icon.
+
+![GitLab Code Button](./assets/gitlab_code_button_http.png)
+
 > **Note:** ISE credentials (`ISE_URL`, `ISE_USERNAME`, `ISE_PASSWORD`) and the TrustSec device secrets are pre-configured at the `md-as-code` group level.
 
 ## Step 6: Push to GitLab
 
-In the VS Code terminal:
+Back in the VS Code terminal, first, lets check the remotes of the repository by issuing following command:
+
+```bash
+git remote -v
+```
+
+You should see the following output:
+
+```bash
+origin  https://github.com/cisco-docs/ltrxar-3100-ise.git (fetch)
+origin  https://github.com/cisco-docs/ltrxar-3100-ise.git (push)
+```
+Now, add the GitLab instance as a second remote and push the repository:
+
+```bash
+git remote add gitlab <PROJECT_URL>
+```
+For example:
 
 ```bash
 git remote add gitlab http://198.18.128.50/md-as-code/ltrxar-3100-ise.git
 git push gitlab main
 ```
 
-When prompted, enter `labuser` / `C1sco12345`.
+Your credentials from Lab 1 will be cached, however if prompted again, in the top search bar enter:
+- **Username:** `labuser`
+- **Password:** `C1sco12345`
+
+**Expected output:**
+
+You may see certificate warnings and a message about unencrypted HTTP. This is expected and can be ignored.
+
+```console
+fatal: Unencrypted HTTP is not supported for GitHub. Ensure the repository remote URL is using HTTPS.
+warning: ----------------- SECURITY WARNING ----------------
+warning: | TLS certificate verification has been disabled! |
+warning: ---------------------------------------------------
+warning: HTTPS connections may not be secure. See https://aka.ms/gcm/tlsverify for more information.
+Enumerating objects: 271, done.
+Counting objects: 100% (271/271), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (157/157), done.
+Writing objects: 100% (271/271), 102.66 KiB | 6.04 MiB/s, done.
+Total 271 (delta 97), reused 271 (delta 97), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (97/97), done.
+To http://198.18.128.50/md-as-code/ltrxar-3100-ise.git
+ * [new branch]      main -> main
+```
 
 > **Note:** The ISE repository uses `main` as the default branch name.
 
@@ -336,7 +384,7 @@ Open `data/trust_sec.nac.yaml` and add a new matrix entry:
       # ... existing entries ...
       - source_sgt: Servers
         destination_sgt: Employees
-        sgacl_name: DENY-IP-LOG
+        sgacl_name: LTRXAR_DENY_IP_LOG
         rule_status: ENABLED
 ```
 

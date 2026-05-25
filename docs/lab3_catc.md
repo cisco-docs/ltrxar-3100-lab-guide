@@ -22,6 +22,15 @@ This lab provisions two SDA fabrics managed by a single Catalyst Center instance
 
 Both fabrics share city-level AAA settings (ISE 3.3) and draw IP pool reservations from the same parent `Overlay` pool.
 
+> **Housekeeping:** Depending on the lab environment, there might be a case that your Catalyst 9000 switches might had some configuration that might prevent you automation pipeline to kick in due to order of operations. These configurations may not impact directly for this lab, but if you like to make sure, log into all the switches and issue following commands:
+> | Device | Command | 
+> | --- | --- |
+> | FIAB | `no aaa accounting update` <br> `default interface GigabitEthernet1/0/24` |
+> | BORDER | `no aaa accounting update` |
+> | EDGE01 | `no aaa accounting update` |
+> | EDGE02 | `no aaa accounting update` |
+
+
 ## Repository Structure
 
 ```
@@ -279,18 +288,64 @@ Create a new project:
 5. **Uncheck** "Initialize repository with a README"
 6. Click **Create project**
 
+![GitLab Catalyst Center Project](./assets/gitlab_new_project_catalystcenter.png)
+
+Once the project is created, click on the `Code` button and copy the URL displayed under `Clone with HTTP` by clicking the `Copy URL` icon.
+
+![GitLab Code Button](./assets/gitlab_code_button_http.png)
+
 > **Note:** Catalyst Center credentials (`CC_URL`, `CC_USERNAME`, `CC_PASSWORD`) are pre-configured at the `md-as-code` group level.
 
 ## Step 6: Push to GitLab
 
-In the VS Code terminal:
+Back in the VS Code terminal, first, lets check the remotes of the repository by issuing following command:
+
+```bash
+git remote -v
+```
+
+You should see the following output:
+
+```bash
+origin  https://github.com/cisco-docs/ltrxar-3100-catalystcenter.git (fetch)
+origin  https://github.com/cisco-docs/ltrxar-3100-catalystcenter.git (push)
+```
+Now, add the GitLab instance as a second remote and push the repository:
+
+```bash
+git remote add gitlab <PROJECT_URL>
+```
+For example:
 
 ```bash
 git remote add gitlab http://198.18.128.50/md-as-code/ltrxar-3100-catalystcenter.git
-git push gitlab master
+git push gitlab main
 ```
 
-When prompted, enter `labuser` / `C1sco12345`.
+Your credentials from Lab 1 will be cached, however if prompted again, in the top search bar enter:
+- **Username:** `labuser`
+- **Password:** `C1sco12345`
+
+**Expected output:**
+
+You may see certificate warnings and a message about unencrypted HTTP. This is expected and can be ignored.
+
+```console
+fatal: Unencrypted HTTP is not supported for GitHub. Ensure the repository remote URL is using HTTPS.
+warning: ----------------- SECURITY WARNING ----------------
+warning: | TLS certificate verification has been disabled! |
+warning: ---------------------------------------------------
+warning: HTTPS connections may not be secure. See https://aka.ms/gcm/tlsverify for more information.
+Enumerating objects: 703, done.
+Counting objects: 100% (703/703), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (312/312), done.
+Writing objects: 100% (703/703), 215.86 KiB | 11.36 MiB/s, done.
+Total 703 (delta 368), reused 697 (delta 365), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (368/368), done.
+To http://198.18.128.50/md-as-code/ltrxar-3100-catalystcenter.git
+ * [new branch]      main -> main
+```
 
 ## Step 7: Monitor the Pipeline
 
@@ -330,12 +385,10 @@ Open a browser and navigate to: `https://198.18.129.100`
 Log in with `admin` / `C1sco12345`.
 
 1. Navigate to **Design → Network Hierarchy**. Confirm `Bld A` and `Bld B` exist under `Global/USA/Nevada/Las Vegas`.
-2. Navigate to **Design → Network Settings → IP Address Pools** for `Las Vegas`. Confirm `EmployeesPool`, `ServersPool`, and `IoTPool` are visible.
-3. Navigate to **Provision → Fabric Sites**. Confirm `Bld A` and `Bld B` appear.
-4. Click `Bld A` → **Virtual Networks**. Confirm the `Campus` VN with `VLAN_EMPLOYEES` and `VLAN_SERVERS` anycast gateways.
-5. Navigate to **Provision → Inventory**. Confirm devices appear with their fabric role assignments.
+   ![Catalyst Center Network Hierarchy](./assets/catc_network_hierarchy.png)
+2. Navigate to **Design → Network Settings → IP Address Pools** for `Las Vegas` and each building in that site. Confirm `EmployeesPool`, `ServersPool`, and `IoTPool` are visible.
 
-<!-- ![Catalyst Center Fabric](./assets/catc_fabric.png) -->
+For this exercise, these are the only two items that we will be verifying. There is a `backup_data` folder in this repository that contains additional files which we will use in Multi-Domain lab. 
 
 ## Understanding the CI/CD Pipeline
 
