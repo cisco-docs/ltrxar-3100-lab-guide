@@ -2,7 +2,8 @@
 
 In this lab you will use the **ACI as Code** solution to configure an ACI fabric. You will explore the YAML data model, understand how it maps to ACI objects, and deploy the configuration to the APIC simulator through a GitLab CI/CD pipeline.
 
-> **Note:** The APIC simulator has no data plane — BGP peers configured in this lab will show as `Idle`. This is expected behavior and does not affect the automation exercises.
+!!! note
+    The APIC simulator has no data plane — BGP peers configured in this lab will show as `Idle`. This is expected behavior and does not affect the automation exercises.
 
 ## Lab Objectives
 
@@ -180,6 +181,15 @@ apic:
           l3outs:
             - L3OUT-SDWAN-PROD
 
+        - name: BD-Web
+          vrf: PROD
+          unicast_routing: true
+          subnets:
+            - ip: 192.168.11.1/24
+              public: true
+          l3outs:
+            - L3OUT-SDWAN-PROD
+
       contracts:
         - name: CT-PROD-PERMIT-ANY
           scope: context
@@ -189,11 +199,49 @@ apic:
                 - filter: default
                   action: permit
 
+      l3outs:
+        - name: L3OUT-SDWAN-PROD
+          vrf: PROD
+          domain: ROUTED1
+          import_route_control_enforcement: true
+          export_route_control_enforcement: true
+          nodes:
+            - node_id: 102
+              router_id: 10.255.100.102
+              interfaces:
+                - port: 1
+                  vlan: 3010
+                  ip: 10.100.10.1/30
+                  bgp_peers:
+                    - ip: 10.100.10.2
+                      remote_as: 65200
+                      local_as: 65100
+                      admin_state: true
+                      unicast_address_family: true
+                      send_community: true
+                      send_ext_community: true
+          external_endpoint_groups:
+            - name: EXT-EPG-PROD
+              subnets:
+                - prefix: 0.0.0.0/0
+                  import_route_control: true
+                  export_route_control: true
+                  aggregate_import_route_control: true
+                  aggregate_export_route_control: true
+                  import_security: true
+              contracts:
+                consumers:
+                  - CT-PROD-PERMIT-ANY
+                providers:
+                  - CT-PROD-PERMIT-ANY
+
       application_profiles:
         - name: PROD
           endpoint_groups:
             - name: EPG-Servers
               bridge_domain: BD-Servers
+              physical_domains:
+                - PHYSICAL1
               contracts:
                 consumers:
                   - CT-PROD-PERMIT-ANY
@@ -203,10 +251,20 @@ apic:
                 - node_id: 101
                   port: 3
                   vlan: 30
+
+            - name: EPG-Web
+              bridge_domain: BD-Web
+              physical_domains:
+                - PHYSICAL1
+              contracts:
+                consumers:
+                  - CT-PROD-PERMIT-ANY
+                providers:
+                  - CT-PROD-PERMIT-ANY
 ```
 
 **Key points:**
-- The L3Out `L3OUT-SDWAN-PROD` is also defined in this file — it configures an eBGP peering on LEAF102 eth1/1 (VLAN 3010, `10.100.10.1/30`) toward the SD-WAN edge (`10.100.10.2`, AS 65200)
+- L3Out is defined inline in this file, BGP peer 10.100.10.2 remote-as 65200 local-as 65100 on LEAF102 port 1 VLAN 3010
 - This is the ACI side of the multi-domain integration you will complete in Lab 5
 - Contract references within EPGs use names only — no MOPaths or DNs
 
@@ -258,7 +316,8 @@ Once the project is created, click on the `Code` button and copy the URL display
 
 The project URL will be: `http://198.18.128.50/md-as-code/ltrxar-3100-aci.git`
 
-> **Note:** CI/CD variables (ACI credentials, GitLab token) are pre-configured at the **group level** (`md-as-code`) in this lab environment. You do not need to set them manually for individual projects.
+!!! note
+    CI/CD variables (ACI credentials, GitLab token) are pre-configured at the **group level** (`md-as-code`) in this lab environment. You do not need to set them manually for individual projects.
 
 ## Step 6: Push to GitLab
 
@@ -337,10 +396,10 @@ In the pipeline view, click the **play button (▶)** next to the `deploy` job.
 
 The job will run `terraform apply -auto-approve` using the plan artifact from the previous stage. When complete, the **test-integration** stage runs automatically to verify the deployed state against the APIC.
 
-> **Expected output:**
-> ```
-> Apply complete! Resources: 47 added, 0 changed, 0 destroyed.
-> ```
+!!! example "Expected Output"
+    ```
+    Apply complete! Resources: 47 added, 0 changed, 0 destroyed.
+    ```
 
 ## Step 9: Verify in the APIC GUI
 
@@ -351,11 +410,12 @@ Log in with `admin` / `C1sco12345`.
 **Verify tenant PROD:**
 
 1. Navigate to **Tenants → PROD → Networking → VRFs**. Confirm `PROD` VRF exists.
-2. Navigate to **Tenants → PROD → Networking → Bridge Domains**. Confirm `BD-Servers` and `BD-Web` exist with their subnets.
+2. Navigate to **Tenants → PROD → Networking → Bridge Domains**. Confirm `BD-Servers` (`192.168.10.1/24`) and `BD-Web` (`192.168.11.1/24`) exist.
 3. Navigate to **Tenants → PROD → Application Profiles → PROD → Application EPGs**. Confirm `EPG-Servers` and `EPG-Web` exist.
 4. Navigate to **Tenants → PROD → Networking → L3Outs → L3OUT-SDWAN-PROD**. Confirm the L3Out exists with the BGP peer on LEAF102.
 
-> **Expected:** The BGP peer `10.100.10.2` will show as `Idle`. This is expected since the ACI is run in simulation mode and has no data plane. 
+!!! example "Expected"
+    The BGP peer `10.100.10.2` will show as `Idle`. This is expected since the ACI is run in simulation mode and has no data plane.
 
 **Verify access policies:**
 
@@ -469,7 +529,7 @@ A new pipeline run starts automatically. The **plan** stage will show exactly on
 In this lab you:
 
 - Cloned the ACI as Code repository from GitHub and explored the YAML data model
-- Understood how `*.nac.yaml` files map to ACI policy objects (VLAN pools, domains, tenants, EPGs, L3Outs)
+- Understood how `*.nac.yaml` files map to ACI policy objects (including `EPG-Servers` and `EPG-Web`)
 - Created a GitLab project and pushed the repository to the lab CI/CD environment
 - Observed the pipeline run through validate → plan → deploy → test stages
 - Verified the deployed configuration in the APIC GUI

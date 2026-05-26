@@ -73,7 +73,8 @@ Every domain in this lab follows the same five-step workflow:
   5. Notify      →  Send Webex notification
 ```
 
-> **Note:** some of the repositories may have an additional `destroy` step to clean up the resources after the test is complete. For production environments, it is recommended to modify the `*.nac.yaml` files to remove the resources and trigger the pipeline. The apply process will in-turn trigger the destroy process to clean up the resources.
+!!! note
+    Some of the repositories may have an additional `destroy` step to clean up the resources after the test is complete. For production environments, it is recommended to modify the `*.nac.yaml` files to remove the resources and trigger the pipeline. The apply process will in-turn trigger the destroy process to clean up the resources.
 
 ![Net-as-Code Workflow](./assets/nac_workflow.png)
 
@@ -95,7 +96,8 @@ Each domain repository in this lab follows the same layout:
 └── README.md
 ```
 
-> **Key insight:** In day-to-day operations you only touch files inside `data/`. Everything else is infrastructure that the pipeline uses automatically.
+!!! tip "Key Insight"
+    In day-to-day operations you only touch files inside `data/`. Everything else is infrastructure that the pipeline uses automatically.
 
 ## The Four Domain Modules in This Lab
 

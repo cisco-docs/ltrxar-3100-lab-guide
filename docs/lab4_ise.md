@@ -95,9 +95,9 @@ Open `data/trust_sec.nac.yaml`. This is the heart of the lab's security policy.
 ise:
   trust_sec:
     security_groups:
-      - name: Employees
+      - name: IT_Admin
         description: Internal user endpoints (laptops, workstations)
-        value: 10
+        value: 40
       - name: Servers
         description: Production servers
         value: 20
@@ -106,28 +106,28 @@ ise:
         value: 30
 ```
 
-SGT values (10, 20, 30) are 16-bit tags carried in the Ethernet frame (CMD header) or across the SD-WAN overlay. These values must be consistent across all enforcement domains — ISE, Catalyst Center, and SD-WAN all reference the same numeric values.
+SGT values (40, 20, 30) are 16-bit tags carried in the Ethernet frame (CMD header) or across the SD-WAN overlay. These values must be consistent across all enforcement domains — ISE, Catalyst Center, and SD-WAN all reference the same numeric values.
 
 #### Security Group ACLs (SGACLs)
 
 ```yaml
     security_group_acls:
-      - name: PERMIT-ANY
+      - name: PERMIT_ANY
         description: Permit all IP traffic between SGTs
         ip_version: IP_AGNOSTIC
         acl_content: |
           permit ip
 
-      - name: PERMIT-CAMERA-STREAM
-        description: Allow Employees to view camera streams (RTSP + HTTP)
+      - name: PERMIT_CAMERA_STREAM
+        description: Allow IT_Admins to view camera streams (RTSP + HTTP)
         ip_version: IPV4
         acl_content: |
           permit tcp dst eq 554
           permit tcp dst eq 8080
           deny ip
 
-      - name: DENY-IP-LOG
-        description: Deny everything and log
+      - name: LTRXAR_DENY_IP_LOG
+        description: Deny everything and log (headline drop SGACL)
         ip_version: IP_AGNOSTIC
         acl_content: |
           deny ip log
@@ -140,14 +140,17 @@ SGACLs are written in Cisco ACL syntax and applied between SGT pairs at egress. 
 ```yaml
     ip_sgt_mappings:
       - name: laptop
+        host_name: laptop
         host_ip: 192.168.100.10
-        sgt: Employees
+        sgt: IT_Admin
         deploy_type: ALL
       - name: server
+        host_name: server
         host_ip: 192.168.110.10
         sgt: Servers
         deploy_type: ALL
       - name: camera
+        host_name: camera
         host_ip: 192.168.200.10
         sgt: Cameras
         deploy_type: ALL
@@ -161,36 +164,37 @@ Static mappings assign an SGT to a specific IP address. In production, SGTs are 
 
 ```yaml
     matrix_entries:
-      - source_sgt: Employees
+      - source_sgt: IT_Admin
         destination_sgt: Servers
-        sgacl_name: PERMIT-ANY
+        sgacl_name: PERMIT_ANY
         rule_status: ENABLED
 
-      - source_sgt: Employees
+      - source_sgt: IT_Admin
         destination_sgt: Cameras
-        sgacl_name: PERMIT-CAMERA-STREAM
+        sgacl_name: PERMIT_CAMERA_STREAM
         rule_status: ENABLED
 
       - source_sgt: Cameras
         destination_sgt: Servers
-        sgacl_name: DENY-IP-LOG
+        sgacl_name: LTRXAR_DENY_IP_LOG
         rule_status: ENABLED
 
       - source_sgt: Cameras
-        destination_sgt: Employees
-        sgacl_name: DENY-IP-LOG
+        destination_sgt: IT_Admin
+        sgacl_name: LTRXAR_DENY_IP_LOG
         rule_status: ENABLED
 ```
 
 The policy matrix specifies which SGACL applies for each source SGT → destination SGT pair:
 
-|  | → Employees | → Servers | → Cameras |
+|  | → IT_Admin | → Servers | → Cameras |
 |---|---|---|---|
-| **Employees →** | (default) | `PERMIT-ANY` | `PERMIT-CAMERA-STREAM` |
+| **IT_Admin →** | (default) | `PERMIT_ANY` | `PERMIT_CAMERA_STREAM` |
 | **Servers →** | (default) | (default) | (default) |
-| **Cameras →** | `DENY-IP-LOG` | `DENY-IP-LOG` | (default) |
+| **Cameras →** | `LTRXAR_DENY_IP_LOG` | `LTRXAR_DENY_IP_LOG` | (default) |
 
-> **Security intent:** Cameras can stream to Employees (RTSP/HTTP only) but cannot initiate other connections. Cameras cannot reach Servers at all. This models a common IoT isolation pattern.
+!!! tip "Security Intent"
+    Cameras can stream to IT_Admin endpoints (RTSP/HTTP only) but cannot initiate other connections. Cameras cannot reach Servers at all. This models a common IoT isolation pattern.
 
 ### Network Resources (`network_resources.nac.yaml`)
 
@@ -200,14 +204,14 @@ Open `data/network_resources.nac.yaml`. This file registers the SDA fabric devic
 ise:
   network_resources:
     network_devices:
-      - name: BORDER
+      - name: SDA-BORDER
         description: SDA Fabric A border + control plane node
         ips:
-          - ip: 198.18.130.10
+          - ip: 198.18.140.31
         radius:
           shared_secret: __PLACEHOLDER_SHARED_SECRET__
         trust_sec:
-          device_id: BORDER
+          device_id: SDA-BORDER
           device_password: __PLACEHOLDER_DEVICE_PASSWORD__
           send_configuration_to_device: true
           send_configuration_to_device_using: ENABLE_USING_COA
@@ -218,7 +222,8 @@ ise:
 - `send_configuration_to_device_using: ENABLE_USING_COA` means ISE pushes policy updates via RADIUS Change of Authorization — without waiting for the device's next scheduled refresh
 - The `__PLACEHOLDER__` values are secrets replaced at pipeline run time via GitLab CI/CD variables
 
-> **Note:** In a production deployment, these secrets are injected from a secrets manager (HashiCorp Vault, CyberArk) as masked CI/CD variables — never committed in plaintext.
+!!! note
+    In a production deployment, these secrets are injected from a secrets manager (HashiCorp Vault, CyberArk) as masked CI/CD variables — never committed in plaintext.
 
 ## Step 5: Create a GitLab Project
 
@@ -243,7 +248,8 @@ Once the project is created, click on the `Code` button and copy the URL display
 
 ![GitLab Code Button](./assets/gitlab_code_button_http.png)
 
-> **Note:** ISE credentials (`ISE_URL`, `ISE_USERNAME`, `ISE_PASSWORD`) and the TrustSec device secrets are pre-configured at the `md-as-code` group level.
+!!! note
+    ISE credentials (`ISE_URL`, `ISE_USERNAME`, `ISE_PASSWORD`) and the TrustSec device secrets are pre-configured at the `md-as-code` group level.
 
 ## Step 6: Push to GitLab
 
@@ -296,7 +302,8 @@ To http://198.18.128.50/md-as-code/ltrxar-3100-ise.git
  * [new branch]      main -> main
 ```
 
-> **Note:** The ISE repository uses `main` as the default branch name.
+!!! note
+    The ISE repository uses `main` as the default branch name.
 
 ## Step 7: Monitor the Pipeline
 
@@ -311,7 +318,8 @@ The ISE pipeline has a simplified set of stages compared to the ACI, SD-WAN, and
 | **deploy** | `deploy` | **Manual trigger** — `terraform apply` pushes configuration to ISE |
 | **cleanup** | `cleanup` | **Manual trigger** — `terraform destroy` (for lab reset) |
 
-> **Note:** The ISE pipeline uses a pinned Docker image (`danischm/nac:0.1.5`) for stability with the ISE provider version. It also includes a DNS workaround in `before_script` and disables IPv6 via `GODEBUG: net.ipv6=off` to address known ISE provider compatibility issues.
+!!! note
+    The ISE pipeline uses a pinned Docker image (`danischm/nac:0.1.5`) for stability with the ISE provider version. It also includes a DNS workaround in `before_script` and disables IPv6 via `GODEBUG: net.ipv6=off` to address known ISE provider compatibility issues.
 
 Wait for **validate** and **plan** to complete. Review the plan output.
 
@@ -327,10 +335,10 @@ Open a browser and navigate to ISE: `https://198.18.133.30`
 
 Log in with `admin` / `C1sco12345`.
 
-1. Navigate to **Work Centers → TrustSec → Components → Security Groups**. Confirm `Employees` (SGT 10), `Servers` (SGT 20), and `Cameras` (SGT 30) exist.
-2. Navigate to **Work Centers → TrustSec → Components → Security Group ACLs**. Click on `PERMIT-CAMERA-STREAM` and confirm the ACL content.
+1. Navigate to **Work Centers → TrustSec → Components → Security Groups**. Confirm `IT_Admin` (SGT 40), `Servers` (SGT 20), and `Cameras` (SGT 30) exist.
+2. Navigate to **Work Centers → TrustSec → Components → Security Group ACLs**. Click on `PERMIT_CAMERA_STREAM` and confirm the ACL content.
 3. Navigate to **Work Centers → TrustSec → TrustSec Policy → Egress Policy → Matrix**. Confirm the four matrix entries are in place.
-4. Navigate to **Administration → Network Resources → Network Devices**. Confirm `BORDER`, `FIAB`, and the cEdge devices are registered.
+4. Navigate to **Administration → Network Resources → Network Devices**. Confirm `SDA-BORDER`, `SDA-FIAB`, `SDA-EDGE-01`, and `SDA-EDGE-02` are registered. (Note: cEdge devices are not registered as they use CTS inline tagging).
 
 <!-- ![ISE TrustSec Matrix](./assets/ise_matrix.png) -->
 
@@ -375,7 +383,7 @@ cleanup:
 
 ## Day-2 Operation: Modify the Policy Matrix
 
-Simulate a policy change by adding a new restriction: prevent servers from initiating connections to employee endpoints.
+Simulate a policy change by adding a new restriction: prevent servers from initiating connections to IT_Admin endpoints.
 
 Open `data/trust_sec.nac.yaml` and add a new matrix entry:
 
@@ -383,7 +391,7 @@ Open `data/trust_sec.nac.yaml` and add a new matrix entry:
     matrix_entries:
       # ... existing entries ...
       - source_sgt: Servers
-        destination_sgt: Employees
+        destination_sgt: IT_Admin
         sgacl_name: LTRXAR_DENY_IP_LOG
         rule_status: ENABLED
 ```
@@ -392,7 +400,7 @@ Commit and push:
 
 ```bash
 git add data/trust_sec.nac.yaml
-git commit -m "Restrict Servers from initiating connections to Employees"
+git commit -m "Restrict Servers from initiating connections to IT_Admin endpoints"
 git push gitlab main
 ```
 

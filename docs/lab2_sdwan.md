@@ -33,9 +33,10 @@ If you have closed the RDP session from Lab 1, reconnect:
 - **Username:** `admin`
 - **Password:** `C1sco12345`
 
-> **Housekeeping:** There might be a case where once your SDWAN Manager is accessible, the 2 site routers might already be associated with the `edge_basic` configuration group. If that is the case, you can remove the routers from the `edge_basic` configuration group by navigating to `Configuration > Configuration Groups > Edge Basic > remove both routers from deploy` and click on `save`. This will allow you to deploy SDWAN as code without any errors.
->
-> ![SDWAN Manager Configuration Groups](./assets/sdwan_manager_configuration_groups.png)
+!!! warning "Housekeeping"
+    There might be a case where once your SDWAN Manager is accessible, the 2 site routers might already be associated with the `edge_basic` configuration group. If that is the case, you can remove the routers from the `edge_basic` configuration group by navigating to `Configuration > Configuration Groups > Edge Basic > remove both routers from deploy` and click on `save`. This will allow you to deploy SDWAN as code without any errors.
+
+    ![SDWAN Manager Configuration Groups](./assets/sdwan_manager_configuration_groups.png)
 
 
 ## Step 2: Clone the Repository
@@ -160,7 +161,29 @@ The lab defines TLOC interface templates — one for the public internet transpo
           propagate_sgt: true
 ```
 
-> **Important:** `propagate_sgt: true` enables TrustSec SGT propagation across the SD-WAN overlay. This is the SD-WAN side of the end-to-end SGT enforcement you will configure in ISE (Lab 4) and validate in the multi-domain integration (Lab 5).
+### Additional Feature Templates
+
+The repository also includes the following base feature templates that form the foundation for the multi-domain device template in Lab 5:
+
+| Template Name | Type | Purpose |
+|---|---|---|
+| `FT-REMOTE-EDGE-OMP-01` | OMP | OMP route advertisement (connected, static) |
+| `FT-REMOTE-EDGE-AAA-01` | AAA | Local authentication (admin + failsafe users) |
+| `FT-REMOTE-EDGE-BANNER-01` | Banner | Login and MOTD banners |
+| `FT-REMOTE-EDGE-BFD-01` | BFD | BFD timers (biz-internet + mpls colors) |
+| `FT-REMOTE-EDGE-CLI-BASE-01` | CLI | Base CLI config (BGP community, BFD template) |
+| `FT-REMOTE-EDGE-GLOBAL-01` | Global Settings | CDP/LLDP enable |
+| `FT-REMOTE-EDGE-LOGGING-01` | Logging | Syslog to VPN 30 servers |
+| `FT-REMOTE-EDGE-NTP-01` | NTP | NTP servers via VPN 30 |
+| `FT-REMOTE-EDGE-SECURITY-01` | Security | IPsec rekey interval |
+| `FT-REMOTE-EDGE-SNMPV3-01` | SNMP | SNMPv3 groups, users, views |
+| `FT-REMOTE-EDGE-SYSTEM-01` | System | Hostname, site-id, system-ip (all variables) |
+
+!!! note
+    You do not need to understand every template in detail for this lab. These templates are deployed as a library and will be composed into a complete device template in Lab 5 (Multi-Domain Integration).
+
+!!! important
+    `propagate_sgt: true` enables TrustSec SGT propagation across the SD-WAN overlay. This is the SD-WAN side of the end-to-end SGT enforcement you will configure in ISE (Lab 4) and validate in the multi-domain integration (Lab 5).
 
 ## Step 5: Create a GitLab Project
 
@@ -185,7 +208,8 @@ Once the project is created, click on the `Code` button and copy the URL display
 
 The project URL will be: `http://198.18.128.50/md-as-code/ltrxar-3100-sdwan.git`
 
-> **Note:** SD-WAN Manager credentials (`SDWAN_URL`, `SDWAN_USERNAME`, `SDWAN_PASSWORD`) are pre-configured at the `md-as-code` group level. No per-project variable setup is required.
+!!! note
+    SD-WAN Manager credentials (`SDWAN_URL`, `SDWAN_USERNAME`, `SDWAN_PASSWORD`) are pre-configured at the `md-as-code` group level. No per-project variable setup is required.
 
 ## Step 6: Push to GitLab
 
@@ -271,12 +295,23 @@ Verify the following feature templates have been created:
 
 | Template Name | Type |
 |---|---|
-| `FT-REMOTE-VPN30-CORP` | Cisco VPN |
-| `FT-REMOTE-VPN40-GUEST` | Cisco VPN |
-| `FT-REMOTE-VPN0-OVERLAY` | Cisco VPN |
-| `FT-REMOTE-VPN512-MGMT` | Cisco VPN |
-| `FT-TLOC1-PUBLIC-REMOTE-VPN0` | Cisco VPN Interface |
-| `FT-TLOC2-PRIVATE-REMOTE-VPN0` | Cisco VPN Interface |
+| `FT-REMOTE-VPN30-CORP` | VPN |
+| `FT-REMOTE-VPN40-GUEST` | VPN |
+| `FT-REMOTE-VPN0-OVERLAY` | VPN |
+| `FT-REMOTE-VPN512-MGMT` | VPN |
+| `FT-TLOC1-PUBLIC-REMOTE-VPN0` | Ethernet Interface |
+| `FT-TLOC2-PRIVATE-REMOTE-VPN0` | Ethernet Interface |
+| `FT-REMOTE-EDGE-OMP-01` | OMP |
+| `FT-REMOTE-EDGE-AAA-01` | AAA |
+| `FT-REMOTE-EDGE-BANNER-01` | Banner |
+| `FT-REMOTE-EDGE-BFD-01` | BFD |
+| `FT-REMOTE-EDGE-CLI-BASE-01` | CLI |
+| `FT-REMOTE-EDGE-GLOBAL-01` | Global Settings |
+| `FT-REMOTE-EDGE-LOGGING-01` | Logging |
+| `FT-REMOTE-EDGE-NTP-01` | NTP |
+| `FT-REMOTE-EDGE-SECURITY-01` | Security |
+| `FT-REMOTE-EDGE-SNMPV3-01` | SNMP |
+| `FT-REMOTE-EDGE-SYSTEM-01` | System |
 
 Click on `FT-REMOTE-VPN30-CORP` and review the VPN ID, OMP route advertisement settings, and static route variables.
 
@@ -289,7 +324,7 @@ Open `.gitlab-ci.yml`. The SD-WAN pipeline follows the same structure as Lab 1 w
 ```yaml
 image:
   name: danischm/nac:latest
-  pull_policy: if-not-present
+  pull_policy: always
 
 stages:
   - validate
@@ -300,10 +335,32 @@ stages:
   - destroy
 
 variables:
-  SDWAN_USERNAME: ...
-  SDWAN_PASSWORD: ...
-  SDWAN_URL: ...
-  TF_HTTP_ADDRESS: "${GITLAB_API_URL}/projects/${CI_PROJECT_ID}/terraform/state/tfstate"
+  GIT_SSL_NO_VERIFY: "true"
+
+  SDWAN_USERNAME:
+    description: "Cisco SDWAN Username"
+  SDWAN_PASSWORD:
+    description: "Cisco SDWAN Password"
+  SDWAN_URL:
+    description: "Cisco SDWAN URL"
+  GITLAB_TOKEN:
+    description: "User Access Token. Used to create comments on Merge Requests"
+  TF_HTTP_USERNAME:
+    description: "GitLab Username"
+    value: "gitlab-ci-token"
+  TF_HTTP_PASSWORD:
+    description: "GitLab Access Token"
+    value: "${GITLAB_TOKEN}"
+  WEBEX_ROOM_ID:
+    description: "Cisco Webex Room ID"
+  WEBEX_TOKEN:
+    description: "Cisco Webex Bot Token"
+  GITLAB_API_URL:
+    description: "GitLab API v4 root URL"
+    value: "${CI_API_V4_URL}"
+  TF_HTTP_ADDRESS:
+    description: "GitLab HTTP Address to store the TF state file"
+    value: "${GITLAB_API_URL}/projects/${CI_PROJECT_ID}/terraform/state/tfstate"
 ```
 
 **Idempotency test** — After deployment, the pipeline runs a second `terraform plan` to verify that the deployed state exactly matches the desired state:

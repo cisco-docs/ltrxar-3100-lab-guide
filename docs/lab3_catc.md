@@ -22,13 +22,15 @@ This lab provisions two SDA fabrics managed by a single Catalyst Center instance
 
 Both fabrics share city-level AAA settings (ISE 3.3) and draw IP pool reservations from the same parent `Overlay` pool.
 
-> **Housekeeping:** Depending on the lab environment, there might be a case that your Catalyst 9000 switches might had some configuration that might prevent you automation pipeline to kick in due to order of operations. These configurations may not impact directly for this lab, but if you like to make sure, log into all the switches and issue following commands:
-> | Device | Command | 
-> | --- | --- |
-> | FIAB | `no aaa accounting update` <br> `default interface GigabitEthernet1/0/24` |
-> | BORDER | `no aaa accounting update` |
-> | EDGE01 | `no aaa accounting update` |
-> | EDGE02 | `no aaa accounting update` |
+!!! warning "Housekeeping"
+    Depending on the lab environment, there might be a case that your Catalyst 9000 switches might had some configuration that might prevent you automation pipeline to kick in due to order of operations. These configurations may not impact directly for this lab, but if you like to make sure, log into all the switches and issue following commands:
+
+    | Device | Command |
+    | --- | --- |
+    | FIAB | `no aaa accounting update` <br> `default interface GigabitEthernet1/0/24` |
+    | BORDER | `no aaa accounting update` |
+    | EDGE01 | `no aaa accounting update` |
+    | EDGE02 | `no aaa accounting update` |
 
 
 ## Repository Structure
@@ -38,15 +40,19 @@ ltrxar-3100-catalystcenter/
 ├── main.tf                         # Terraform entry point
 ├── data/
 │   ├── sites.nac.yaml              # Site hierarchy (areas, buildings, floors)
-│   ├── network_settings.nac.yaml   # IP pools, AAA settings
-│   ├── fabric.nac.yaml             # Fabric sites, L3 VNs, anycast gateways
-│   └── devices.nac.yaml            # Device inventory and fabric role assignments
+│   ├── network_settings.nac.yaml   # IP pools, AAA settings, telemetry
+│   └── templates/                  # Day-N CLI templates
+├── backup_data/                    # Multi-domain files (used in Lab 5)
+│   ├── multidomain_fabric.nac.yaml # Fabric sites, L3 VNs, anycast gateways, L3 handoffs
+│   └── multidomain_devices.nac.yaml# Device inventory and fabric role assignments
 ├── defaults/                       # Default values for the module
 ├── schemas/                        # JSON Schema for YAML validation
 ├── templates/                      # Jinja2 test templates for post-deploy checks
 ├── validation/                     # pytest-based semantic tests
 └── .gitlab-ci.yml                  # CI/CD pipeline definition
 ```
+
+**Note:** The `backup_data/` directory contains the fabric provisioning and device inventory files that will be activated in Lab 5 (Multi-Domain Integration). In this lab, you will only deploy the site hierarchy and network settings.
 
 ## Step 1: Connect to the Windows Workstation
 
@@ -84,6 +90,10 @@ terraform {
   backend "http" {}
 }
 
+provider "catalystcenter" {
+  max_timeout = 600
+}
+
 module "catalyst_center" {
   source  = "netascode/nac-catalystcenter/catalystcenter"
   version = "0.3.0"
@@ -97,7 +107,7 @@ module "catalyst_center" {
 
 **Key observations:**
 - `use_bulk_api = true` — enables Catalyst Center's bulk provisioning APIs, which significantly speeds up large deployments by batching API calls
-- `max_timeout = 600` — Catalyst Center operations like fabric provisioning can take several minutes; a high timeout prevents premature failures
+- `max_timeout = 600` — Catalyst Center operations like fabric provisioning can take several minutes; a high timeout in the **provider block** prevents premature failures
 - `backend "http" {}` — Terraform state is stored in GitLab (configured automatically by the pipeline)
 - Provider credentials (`CC_URL`, `CC_USERNAME`, `CC_PASSWORD`) are injected by the pipeline as environment variables
 
@@ -119,22 +129,24 @@ catalyst_center:
       - name: Las Vegas
         parent_name: Global/USA/Nevada
         network_settings:
-          aaa_servers: AAA_Settings      # ISE referenced by name
-        ip_pools_reservations:
-          - EmployeesPool
-          - ServersPool
-          - IoTPool
+          aaa_servers: AAA_Settings
+          telemetry: FABRIC_TELEMETRY
     buildings:
       - name: Bld A
         latitude: 36.1699
         longitude: -115.1398
         country: United States
         parent_name: Global/USA/Nevada/Las Vegas
+        ip_pools_reservations:
+          - EmployeesPool
+          - ServersPool
       - name: Bld B
         latitude: 36.1699
         longitude: -115.1398
         country: United States
         parent_name: Global/USA/Nevada/Las Vegas
+        ip_pools_reservations:
+          - IoTPool
     floors:
       - name: FLOOR_1
         floor_number: 1
@@ -142,7 +154,8 @@ catalyst_center:
 ```
 
 **Key points:**
-- The `ip_pools_reservations` at the `Las Vegas` level makes the pools available to **both** buildings — both Fabric A and Fabric B can reserve from the same parent
+- `ip_pools_reservations` are defined at the **building level** — `EmployeesPool` and `ServersPool` are reserved for Bld A (Fabric A), and `IoTPool` is reserved for Bld B (Fabric B)
+- `telemetry: FABRIC_TELEMETRY` at the Las Vegas level enables wired data collection and uses Catalyst Center as the network collector for both buildings
 - Site paths use `/`-separated names (e.g., `Global/USA/Nevada/Las Vegas`) — these are used as references throughout all data files
 - `aaa_servers: AAA_Settings` references the AAA server defined in `network_settings.nac.yaml`
 
@@ -158,7 +171,8 @@ catalyst_center:
         client_and_endpoint_aaa:
           server_type: ISE
           protocol: RADIUS
-          primary_ip: 198.18.133.30   # ISE 3.3
+          primary_ip: 198.18.133.30
+          shared_secret: C1sco12345
 
     ip_pools:
       - name: Overlay
@@ -177,101 +191,39 @@ catalyst_center:
             prefix_length: 24
             subnet: 192.168.110.0
             gateway: 192.168.110.1
+            dns_servers:
+              - 198.18.130.11
+            dhcp_servers:
+              - 198.18.130.11
           - name: IoTPool
             prefix_length: 24
             subnet: 192.168.200.0
             gateway: 192.168.200.1
+            dns_servers:
+              - 198.18.130.11
+            dhcp_servers:
+              - 198.18.130.11
+
+    telemetry:
+      - name: FABRIC_TELEMETRY
+        wired_data_collection: true
+        wireless_telemetry: false
+        enable_netflow_collector_on_devices: false
+        catalyst_center_as_network_collector: true
+        catalyst_center_as_snmp_server: true
+        catalyst_center_as_syslog_server: true
 ```
 
 **Key points:**
 - `Overlay` is the parent pool (`192.168.0.0/16`); the three child reservations are carved from it
-- ISE (`198.18.133.30`) is configured as the RADIUS server for both client AAA (802.1X) and endpoint AAA (profiling)
+- ISE (`198.18.133.30`) is configured as the RADIUS server for both client AAA (802.1X) and endpoint AAA (profiling) with the shared secret `C1sco12345`
+- `FABRIC_TELEMETRY` enables wired data collection and configures Catalyst Center as the SNMP and syslog collector for fabric devices
 
-### Fabric Configuration (`fabric.nac.yaml`)
+### Fabric and Device Configuration
 
-Open `data/fabric.nac.yaml`. This is the most complex data file — it defines L3 Virtual Networks, fabric sites, and anycast gateways.
+The fabric provisioning and device inventory configuration files (`multidomain_fabric.nac.yaml` and `multidomain_devices.nac.yaml`) are located in the `backup_data/` directory. These files configure the SDA fabric sites, L3 Virtual Networks, anycast gateways, border device L3 handoffs, and device fabric role assignments.
 
-```yaml
-catalyst_center:
-  fabric:
-    l3_virtual_networks:
-      - name: Campus
-      - name: IoT
-
-    fabric_sites:
-      # ─── Fabric A (Bld A) ───
-      - name: Global/USA/Nevada/Las Vegas/Bld A
-        pub_sub_enabled: true
-        l3_virtual_networks:
-          - Campus
-        anycast_gateways:
-          - ip_pool_name: EmployeesPool
-            vlan_name: VLAN_EMPLOYEES
-            traffic_type: DATA
-            l3_virtual_network: Campus
-            security_group_name: Employees      # SGT from ISE
-            group_based_policy_enforcement_enabled: true
-          - ip_pool_name: ServersPool
-            vlan_name: VLAN_SERVERS
-            traffic_type: DATA
-            l3_virtual_network: Campus
-            security_group_name: Servers
-            group_based_policy_enforcement_enabled: true
-
-      # ─── Fabric B (Bld B) ───
-      - name: Global/USA/Nevada/Las Vegas/Bld B
-        pub_sub_enabled: true
-        l3_virtual_networks:
-          - IoT
-        anycast_gateways:
-          - ip_pool_name: IoTPool
-            vlan_name: VLAN_CAMERAS
-            traffic_type: DATA
-            l3_virtual_network: IoT
-            security_group_name: Cameras
-            group_based_policy_enforcement_enabled: true
-```
-
-**Key points:**
-- `security_group_name: Employees` links the anycast gateway to the ISE TrustSec SGT you will configure in Lab 4 — Catalyst Center downloads the SGT-to-VLAN binding from ISE and programs it on fabric edge switches
-- `group_based_policy_enforcement_enabled: true` enables fabric edge switches to enforce the ISE TrustSec policy matrix locally, without forwarding traffic to ISE for per-flow policy lookup
-- The `Campus` VN will be the target of the L3 handoff to SD-WAN in Lab 5
-
-### Device Inventory (`devices.nac.yaml`)
-
-Open `data/devices.nac.yaml`. This file adds devices to Catalyst Center inventory and assigns them to fabric roles.
-
-```yaml
-catalyst_center:
-  inventory:
-    devices:
-      - name: SDA-EDGE-01
-        device_ip: 198.18.130.1
-        pid: C9KV-UADP-8P
-        site: Global/USA/Nevada/Las Vegas/Bld A
-        fabric_site: Global/USA/Nevada/Las Vegas/Bld A
-        fabric_roles:
-          - EDGE_NODE
-        port_assignments:
-          - interface_name: GigabitEthernet1/0/2
-            connected_device_type: USER_DEVICE
-            data_vlan_name: VLAN_EMPLOYEES
-            authenticate_template_name: "No Authentication"
-
-      - name: FIAB
-        device_ip: 198.18.130.11
-        site: Global/USA/Nevada/Las Vegas/Bld B
-        fabric_site: Global/USA/Nevada/Las Vegas/Bld B
-        fabric_roles:
-          - BORDER_NODE
-          - CONTROL_PLANE_NODE
-          - EDGE_NODE
-```
-
-**Key points:**
-- `FIAB` (Fabric-in-a-Box) runs all three fabric roles on a single device — Border, Control Plane, and Edge — which is the standard simulation pattern for campus fabrics
-- `BORDER` (Fabric A border) is defined in the `ltrxar-3100-multidomain` repository — its configuration depends on SD-WAN handoff data defined in Lab 5
-- `port_assignments` map physical interfaces to VLANs — Catalyst Center pushes the access port configuration to the edge switch
+You will activate these files in **Lab 5 — Multi-Domain Integration** by moving them into the `data/` directory. For now, this lab focuses on the site hierarchy and network settings that form the foundation for the fabric deployment.
 
 ## Step 5: Create a GitLab Project
 
@@ -294,7 +246,8 @@ Once the project is created, click on the `Code` button and copy the URL display
 
 ![GitLab Code Button](./assets/gitlab_code_button_http.png)
 
-> **Note:** Catalyst Center credentials (`CC_URL`, `CC_USERNAME`, `CC_PASSWORD`) are pre-configured at the `md-as-code` group level.
+!!! note
+    Catalyst Center credentials (`CC_URL`, `CC_USERNAME`, `CC_PASSWORD`) are pre-configured at the `md-as-code` group level.
 
 ## Step 6: Push to GitLab
 
@@ -361,7 +314,8 @@ The pipeline runs through the standard stages:
 | **test** | `test` | `nac-test` verifies deployed state against Catalyst Center API |
 | **notify** | `success` / `failure` | Sends Webex notification |
 
-> **Note:** The `plan` stage downloads the `nac-catalystcenter` module from the Terraform registry. This may take 2–3 minutes on the first run.
+!!! note
+    The `plan` stage downloads the `nac-catalystcenter` module from the Terraform registry. This may take 2–3 minutes on the first run.
 
 Wait for **validate** and **plan** to complete. Review the plan — you should see resources for the full site hierarchy, IP pools, fabric sites, VNs, anycast gateways, and device assignments.
 
@@ -369,12 +323,10 @@ Wait for **validate** and **plan** to complete. Review the plan — you should s
 
 Click the **play button (▶)** next to the `deploy` job.
 
-Catalyst Center fabric provisioning is long-running. The deploy job may take **10–15 minutes** to complete. This is expected — Catalyst Center must:
-1. Create the site hierarchy
-2. Configure IP pools and AAA settings
-3. Provision fabric sites and L3 VNs
-4. Create anycast gateways and push configs to fabric switches
-5. Assign devices to inventory and fabric roles
+The deploy job will take a few minutes to complete as Catalyst Center creates the site hierarchy and network settings:
+1. Create the site hierarchy (areas, buildings, floors)
+2. Configure IP pools and reservations
+3. Configure AAA settings and telemetry profiles
 
 Once the deploy job turns green, the **test** stage runs automatically.
 
@@ -386,39 +338,44 @@ Log in with `admin` / `C1sco12345`.
 
 1. Navigate to **Design → Network Hierarchy**. Confirm `Bld A` and `Bld B` exist under `Global/USA/Nevada/Las Vegas`.
    ![Catalyst Center Network Hierarchy](./assets/catc_network_hierarchy.png)
-2. Navigate to **Design → Network Settings → IP Address Pools** for `Las Vegas` and each building in that site. Confirm `EmployeesPool`, `ServersPool`, and `IoTPool` are visible.
+2. Navigate to **Design → Network Settings → IP Address Pools** for `Las Vegas` and each building in that site. Confirm `EmployeesPool`, `ServersPool`, and `IoTPool` are visible and correctly assigned to the buildings.
 
-For this exercise, these are the only two items that we will be verifying. There is a `backup_data` folder in this repository that contains additional files which we will use in Multi-Domain lab. 
-
+For this exercise, these are the primary items to verify. The more complex fabric provisioning and device inventory files are located in the `backup_data/` folder and will be activated in the Multi-Domain Integration lab.
 ## Understanding the CI/CD Pipeline
 
 Open `.gitlab-ci.yml`. The Catalyst Center pipeline follows the same structure as the previous labs, with variables specific to Catalyst Center:
 
 ```yaml
 variables:
-  CC_USERNAME: ...
-  CC_PASSWORD: ...
-  CC_URL: ...
-  TF_HTTP_ADDRESS: "${GITLAB_API_URL}/projects/${CI_PROJECT_ID}/terraform/state/tfstate"
+  CC_USERNAME:
+    description: "Cisco Catalyst Center Username"
+  CC_PASSWORD:
+    description: "Cisco Catalyst Center Password"
+  CC_URL:
+    description: "Cisco Catalyst Center URL"
+  TF_HTTP_ADDRESS:
+    description: "GitLab HTTP Address to store the TF state file"
+    value: "${GITLAB_API_URL}/projects/${CI_PROJECT_ID}/terraform/state/tfstate"
 ```
 
 The `test` stage uses `nac-test` to verify the deployed configuration against the live Catalyst Center instance:
 
 ```yaml
-test:
+test-integration:
+  stage: test
   script:
-    - nac-test -d ./data -d ./defaults
-        -t ./templates/catalyst_center/test
-        -o ./tests/results/catalyst_center
+    - nac-test -d ./data -d ./defaults -t ./templates/catalyst_center/test -o ./tests/results/catalyst_center
 ```
 
-The `destroy` stage is triggered by a Git tag matching the pattern `cleanup-catc-*` — this is a safety mechanism that prevents accidental teardown while still allowing automated cleanup for lab reset:
+The `destroy` stage is a manual trigger that allows you to tear down the lab environment when you are finished. It is restricted to the default branch to prevent accidental deletions:
 
 ```yaml
 destroy:
+  stage: destroy
+  resource_group: catc
   rules:
-    - if: "$CI_COMMIT_TAG =~ /^cleanup-catc/"
-      when: always
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+      when: manual
 ```
 
 ## Summary

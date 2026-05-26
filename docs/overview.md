@@ -51,7 +51,8 @@ The Cisco Modeling Lab environment hosts the following virtual network devices:
 
 ## Lab Access
 
-> **Important:** Each workstation has a unique dCloud **Session ID** and **VPN credentials**. You will have to VPN to your virtual lab in order to access all the components of the lab environment.
+!!! important
+    Each workstation has a unique dCloud **Session ID** and **VPN credentials**. You will have to VPN to your virtual lab in order to access all the components of the lab environment.
 
 
 **Step 1 — Connect to your dCloud Session via VPN**
@@ -72,13 +73,14 @@ The Windows VM serves as your jump station for all subsequent steps. Visual Stud
 
 Confirm that the RDP session opens successfully before proceeding.
 
-> **IMPORTANT:** Once you log into the RDP session, open the Chrome browser and navigate to https://198.18.128.27 (or click on the CML bookmark on the browser) to access the Cisco Modeling Lab. Log in using the following credentials:
-> 
-> | Device Name | URL | Username	| Password |
-> |-------------|-----------------|-----------| ----------|
-> | *Cisco Modeling Lab* | [https://198.18.128.27](https://198.18.128.27) | ```admin``` | ```C1sco12345``` |
->
-> If the CML lab is not powered in, click on the triangle icon to power it on. By the time you start pushing the configuration to the CML lab, it will be powered on.
+!!! important
+    Once you log into the RDP session, open the Chrome browser and navigate to https://198.18.128.27 (or click on the CML bookmark on the browser) to access the Cisco Modeling Lab. Log in using the following credentials:
+
+    | Device Name | URL | Username | Password |
+    |---|---|---|---|
+    | *Cisco Modeling Lab* | [https://198.18.128.27](https://198.18.128.27) | `admin` | `C1sco12345` |
+
+    If the CML lab is not powered in, click on the triangle icon to power it on. By the time you start pushing the configuration to the CML lab, it will be powered on.
 
 
 ## Getting Started
