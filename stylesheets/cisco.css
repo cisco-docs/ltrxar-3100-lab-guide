@@ -1,0 +1,249 @@
+/* ============================================================
+   Cisco Brand Color Palette — LTRXAR-3100 Lab Guide
+   Primary:  Cisco Blue  #049fd9
+   Dark:     Cisco Navy  #003087  (used for nav/header)
+   Accent:   Cisco Teal  #00bceb
+   Text:     #1a1a1a (light) / #e8e8e8 (dark)
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500&display=swap');
+
+/* ---------- Custom color tokens ---------- */
+:root {
+  --cisco-blue:       #049fd9;
+  --cisco-navy:       #003087;
+  --cisco-teal:       #00bceb;
+  --cisco-dark-navy:  #00205b;
+  --cisco-light-blue: #e6f6fd;
+  --cisco-gray:       #f5f5f5;
+  --cisco-border:     #d0d0d0;
+}
+
+/* ---------- Material primary/accent overrides ---------- */
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color:        var(--cisco-navy);
+  --md-primary-fg-color--light: var(--cisco-blue);
+  --md-primary-fg-color--dark:  var(--cisco-dark-navy);
+  --md-primary-bg-color:        #ffffff;
+  --md-accent-fg-color:         var(--cisco-blue);
+  --md-accent-fg-color--transparent: rgba(4, 159, 217, 0.1);
+}
+
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color:        var(--cisco-blue);
+  --md-primary-fg-color--light: var(--cisco-teal);
+  --md-primary-fg-color--dark:  var(--cisco-navy);
+  --md-primary-bg-color:        #1a1a2e;
+  --md-accent-fg-color:         var(--cisco-teal);
+  --md-accent-fg-color--transparent: rgba(0, 188, 235, 0.1);
+  --md-default-bg-color:        #16213e;
+}
+
+/* ---------- Header ---------- */
+.md-header {
+  background-color: var(--cisco-navy);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.md-header__title {
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+/* ---------- Navigation tabs ---------- */
+.md-tabs {
+  background-color: var(--cisco-dark-navy);
+}
+
+.md-tabs__link--active,
+.md-tabs__link:hover {
+  color: var(--cisco-teal) !important;
+}
+
+/* ---------- Sidebar nav ---------- */
+.md-nav__link--active {
+  color: var(--cisco-blue) !important;
+  font-weight: 600;
+}
+
+.md-nav__link:hover {
+  color: var(--cisco-blue) !important;
+}
+
+/* ---------- Logo sizing ---------- */
+.md-header__button.md-logo img {
+  height: 36px;
+  width: auto;
+}
+
+/* ---------- Typography ---------- */
+body,
+.md-typeset {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.md-typeset code,
+.md-typeset pre {
+  font-family: 'Source Code Pro for Powerline', 'Source Code Pro', 'Cascadia Code', 'Fira Code', monospace;
+  font-size: 0.85em;
+}
+
+/* ---------- Code blocks ---------- */
+.md-typeset .highlight {
+  border-radius: 6px;
+  border-left: 4px solid var(--cisco-blue);
+}
+
+.md-typeset .highlight pre {
+  border-radius: 0 6px 6px 0;
+}
+
+/* ---------- Inline code ---------- */
+.md-typeset code:not(.highlight code) {
+  background-color: var(--cisco-light-blue);
+  color: var(--cisco-navy);
+  border-radius: 3px;
+  padding: 0.1em 0.35em;
+  font-size: 0.85em;
+}
+
+[data-md-color-scheme="slate"] .md-typeset code:not(.highlight code) {
+  background-color: rgba(4, 159, 217, 0.15);
+  color: var(--cisco-teal);
+}
+
+/* ---------- Admonitions — Cisco-styled ---------- */
+.md-typeset .admonition,
+.md-typeset details {
+  border-radius: 6px;
+  border-left-width: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.md-typeset .admonition.note,
+.md-typeset details.note {
+  border-left-color: var(--cisco-blue);
+}
+
+.md-typeset .admonition.note > .admonition-title,
+.md-typeset details.note > summary {
+  background-color: rgba(4, 159, 217, 0.12);
+  color: var(--cisco-navy);
+}
+
+.md-typeset .admonition.warning,
+.md-typeset details.warning {
+  border-left-color: #f0a500;
+}
+
+.md-typeset .admonition.danger,
+.md-typeset details.danger {
+  border-left-color: #d32f2f;
+}
+
+.md-typeset .admonition.tip,
+.md-typeset details.tip {
+  border-left-color: var(--cisco-teal);
+}
+
+.md-typeset .admonition.important,
+.md-typeset details.important {
+  border-left-color: var(--cisco-blue);
+}
+
+/* ---------- Tables ---------- */
+.md-typeset table:not([class]) {
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  font-size: 0.85rem;
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--cisco-navy);
+  color: #ffffff;
+  font-weight: 600;
+  padding: 0.6rem 1rem;
+}
+
+.md-typeset table:not([class]) tr:nth-child(even) {
+  background-color: var(--cisco-gray);
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) th {
+  background-color: var(--cisco-dark-navy);
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) tr:nth-child(even) {
+  background-color: rgba(255,255,255,0.04);
+}
+
+/* ---------- Headings ---------- */
+.md-typeset h1 {
+  color: var(--cisco-navy);
+  font-weight: 700;
+  border-bottom: 3px solid var(--cisco-blue);
+  padding-bottom: 0.3em;
+}
+
+.md-typeset h2 {
+  color: var(--cisco-navy);
+  font-weight: 600;
+  border-bottom: 1px solid var(--cisco-border);
+  padding-bottom: 0.2em;
+}
+
+.md-typeset h3 {
+  color: var(--cisco-blue);
+  font-weight: 600;
+}
+
+[data-md-color-scheme="slate"] .md-typeset h1,
+[data-md-color-scheme="slate"] .md-typeset h2 {
+  color: var(--cisco-teal);
+}
+
+[data-md-color-scheme="slate"] .md-typeset h3 {
+  color: var(--cisco-blue);
+}
+
+/* ---------- Footer ---------- */
+.md-footer {
+  background-color: var(--cisco-dark-navy);
+}
+
+.md-footer-meta {
+  background-color: var(--cisco-navy);
+}
+
+/* ---------- Search highlight ---------- */
+.md-search-result mark {
+  background-color: rgba(4, 159, 217, 0.25);
+  color: inherit;
+}
+
+/* ---------- Buttons / links ---------- */
+.md-typeset a {
+  color: var(--cisco-blue);
+}
+
+.md-typeset a:hover {
+  color: var(--cisco-teal);
+}
+
+/* ---------- Copy button ---------- */
+.md-clipboard {
+  color: var(--cisco-blue);
+}
+
+/* ---------- Print page ---------- */
+@media print {
+  .md-header,
+  .md-tabs,
+  .md-sidebar,
+  .md-footer {
+    display: none !important;
+  }
+}
