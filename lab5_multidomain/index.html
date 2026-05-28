@@ -21,7 +21,7 @@
         
       
       
-      <link rel="icon" href="../assets/ltrxar_3100_logo.png">
+      <link rel="icon" href="../assets/cisco_logo.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
@@ -111,7 +111,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href=".." title="LTRXAR-3100 — Hands-On Service-as-Code" class="md-header__button md-logo" aria-label="LTRXAR-3100 — Hands-On Service-as-Code" data-md-component="logo">
       
-  <img src="../assets/ltrxar_3100_logo.png" alt="logo">
+  <img src="../assets/cisco_logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -367,7 +367,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="LTRXAR-3100 — Hands-On Service-as-Code" class="md-nav__button md-logo" aria-label="LTRXAR-3100 — Hands-On Service-as-Code" data-md-component="logo">
       
-  <img src="../assets/ltrxar_3100_logo.png" alt="logo">
+  <img src="../assets/cisco_logo.png" alt="logo">
 
     </a>
     LTRXAR-3100 — Hands-On Service-as-Code
@@ -953,6 +953,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#catalyst-center-phase-4-push-cts-bootstrap-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Catalyst Center Phase 4: Push CTS Bootstrap Template
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#ise-trustsec-propagation" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -965,17 +976,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-11-simulate-an-end-to-end-policy-change" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Step 11: Simulate an End-to-End Policy Change
-      
-    </span>
-  </a>
   
 </li>
       
@@ -1255,6 +1255,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#catalyst-center-phase-4-push-cts-bootstrap-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Catalyst Center Phase 4: Push CTS Bootstrap Template
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#ise-trustsec-propagation" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1267,17 +1278,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-11-simulate-an-end-to-end-policy-change" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Step 11: Simulate an End-to-End Policy Change
-      
-    </span>
-  </a>
   
 </li>
       
@@ -1439,7 +1439,7 @@
 </span></code></pre></div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Wait for the Catalyst Center pipeline to complete its <strong>validate</strong> and <strong>plan</strong> stages before proceeding. Don't trigger the deploy yet. The multidomain orchestrator will handle the deployment sequence.</p>
+<p>Wait for the Catalyst Center and SDWAN pipelines to complete its <strong>validate</strong> and <strong>plan</strong> stages before proceeding. Don't trigger the deploy yet. The multidomain orchestrator will handle the deployment sequence.</p>
 </div>
 <h2 id="step-5-explore-the-catalyst-center-multi-domain-data">Step 5: Explore the Catalyst Center Multi-Domain Data<a class="headerlink" href="#step-5-explore-the-catalyst-center-multi-domain-data" title="Permanent link">¶</a></h2>
 <p>Open <code>data/multidomain_fabric.nac.yaml</code> in the <code>ltrxar-3100-catalystcenter</code> repository.</p>
@@ -1526,42 +1526,57 @@
 <p>Navigate to <strong>Provision → Fabric Sites → Bld B → Border Devices</strong>. Confirm <code>FIAB.cisco.eu</code> shows the L3 handoff on VLAN 3050.</p>
 <h3 id="sd-wan-manager-bgp-status">SD-WAN Manager — BGP Status<a class="headerlink" href="#sd-wan-manager-bgp-status" title="Permanent link">¶</a></h3>
 <p>Open SD-WAN Manager: <code>https://198.18.185.11</code> (admin / C1sco12345).</p>
-<p>Navigate to <strong>Monitor → Devices</strong>. Select <code>C-EDGE-01</code> and verify the BGP session toward <code>10.100.50.1</code> (<code>FIAB.cisco.eu</code>) is <code>Established</code>.</p>
-<p>Select <code>C-EDGE-02</code> and verify the BGP session toward <code>10.100.30.1</code> (<code>BORDER.cisco.eu</code>) is <code>Established</code>.</p>
+<p>Navigate to <strong>Monitor → Devices → C-EDGE-01 → Events</strong>. Verify the BGP session toward <code>10.100.50.1</code> (<code>FIAB.cisco.eu</code>) is <code>Established</code>.</p>
+<p>Navigate to <strong>Monitor → Devices → C-EDGE-02 → Events</strong>. Verify the BGP session toward <code>10.100.30.1</code> (<code>BORDER.cisco.eu</code>) is <code>Established</code>.</p>
+<h3 id="catalyst-center-phase-4-push-cts-bootstrap-template">Catalyst Center Phase 4: Push CTS Bootstrap Template<a class="headerlink" href="#catalyst-center-phase-4-push-cts-bootstrap-template" title="Permanent link">¶</a></h3>
+<p>In your <code>ltrxar-3100-catc</code> local clone, open <code>data/multidomain_devices.nac.yaml</code> and uncomment the <code>dayn_templates:</code> block for <code>BORDER.cisco.eu</code> and <code>FIAB.cisco.eu</code>.</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="w">        </span><span class="c1"># Phase 4: uncomment to push CTS bootstrap template</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">        </span><span class="c1"># dayn_templates:</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">        </span><span class="c1">#   regular:</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">        </span><span class="c1">#     - name: cts-bootstrap</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">        </span><span class="c1">#       variables:</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">        </span><span class="c1">#         - name: device_name</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">        </span><span class="c1">#           value: BORDER.cisco.eu</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">        </span><span class="c1">#         - name: cts_password</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">        </span><span class="c1">#           value: C1sco12345</span>
+</span></code></pre></div>
+<p>Once the changes are made, commit these changes and push to GitLab:
+</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>git<span class="w"> </span>add<span class="w"> </span>data/multidomain_devices.nac.yaml
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Push CTS bootstrap template for SDA Edge devices"</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>git<span class="w"> </span>push<span class="w"> </span>gitlab<span class="w"> </span>main
+</span></code></pre></div><p></p>
+<p>A new pipeline run starts automatically. The <strong>plan</strong> stage shows exactly one new resource. Trigger the <strong>deploy</strong> job in Catalyst Center repository and verify the CTS bootstrap template is pushed to the fabric devices.</p>
 <h3 id="ise-trustsec-propagation">ISE — TrustSec Propagation<a class="headerlink" href="#ise-trustsec-propagation" title="Permanent link">¶</a></h3>
-<p>Navigate to <strong>Work Centers → TrustSec → SXP</strong> and verify that the static IP-SGT mappings are being propagated to the network devices.</p>
-<h2 id="step-11-simulate-an-end-to-end-policy-change">Step 11: Simulate an End-to-End Policy Change<a class="headerlink" href="#step-11-simulate-an-end-to-end-policy-change" title="Permanent link">¶</a></h2>
-<p>To demonstrate the full pipeline operational model, add a new <code>PCI</code> zone (SGT 50) isolated from the <code>IT_Admin</code> (SGT 40) and <code>Cameras</code> (SGT 30) zones.</p>
 <ol>
-<li>In your <code>ltrxar-3100-ise</code> local clone, open <code>data/trust_sec.nac.yaml</code> and add:</li>
+<li>In your <code>ltrxar-3100-ise</code> local clone, open <code>data/trust_sec.nac.yaml</code> and add the following:</li>
 </ol>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">security_groups</span><span class="p">:</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PCI</span>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PCI-scoped payment processing servers</span>
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50</span>
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>
-</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="nt">security_group_acls</span><span class="p">:</span>
-</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DENY_PCI_INBOUND</span>
-</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">    </span><span class="nt">ip_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IP_AGNOSTIC</span>
-</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">    </span><span class="nt">acl_content</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">      </span><span class="no">deny ip log</span>
-</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>
-</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="nt">matrix_entries</span><span class="p">:</span>
-</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_sgt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IT_Admin</span>
-</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="w">    </span><span class="nt">destination_sgt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PCI</span>
-</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="w">    </span><span class="nt">sgacl_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DENY_PCI_INBOUND</span>
-</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="w">    </span><span class="nt">rule_status</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ENABLED</span>
-</span><span id="__span-10-17"><a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_sgt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Cameras</span>
-</span><span id="__span-10-18"><a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a><span class="w">    </span><span class="nt">destination_sgt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PCI</span>
-</span><span id="__span-10-19"><a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a><span class="w">    </span><span class="nt">sgacl_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DENY_PCI_INBOUND</span>
-</span><span id="__span-10-20"><a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a><span class="w">    </span><span class="nt">rule_status</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ENABLED</span>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nt">security_groups</span><span class="p">:</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PCI</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PCI-scoped payment processing servers</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="nt">security_group_acls</span><span class="p">:</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DENY_PCI_INBOUND</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">    </span><span class="nt">ip_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IP_AGNOSTIC</span>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">    </span><span class="nt">acl_content</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">      </span><span class="no">deny ip log</span>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="nt">matrix_entries</span><span class="p">:</span>
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_sgt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IT_Admin</span>
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="w">    </span><span class="nt">destination_sgt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PCI</span>
+</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="w">    </span><span class="nt">sgacl_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DENY_PCI_INBOUND</span>
+</span><span id="__span-12-16"><a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="w">    </span><span class="nt">rule_status</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ENABLED</span>
+</span><span id="__span-12-17"><a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_sgt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Cameras</span>
+</span><span id="__span-12-18"><a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a><span class="w">    </span><span class="nt">destination_sgt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PCI</span>
+</span><span id="__span-12-19"><a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="w">    </span><span class="nt">sgacl_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DENY_PCI_INBOUND</span>
+</span><span id="__span-12-20"><a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a><span class="w">    </span><span class="nt">rule_status</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ENABLED</span>
 </span></code></pre></div>
 <ol>
 <li>Commit and push to GitLab:</li>
 </ol>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>git<span class="w"> </span>add<span class="w"> </span>data/trust_sec.nac.yaml
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Add PCI zone isolation (SGT 50)"</span>
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>git<span class="w"> </span>push<span class="w"> </span>gitlab<span class="w"> </span>main
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>git<span class="w"> </span>add<span class="w"> </span>data/trust_sec.nac.yaml
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Add PCI zone isolation (SGT 50)"</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>git<span class="w"> </span>push<span class="w"> </span>gitlab<span class="w"> </span>main
 </span></code></pre></div>
 <ol>
 <li>
@@ -1661,7 +1676,7 @@
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright © 2025 Cisco Systems, Inc. — LTRXAR-3100 Cisco Live Lab Guide
+      Copyright © 2026 Cisco Systems, Inc. — LTRXAR-3100 Cisco Live Lab Guide
 
     </div>
   

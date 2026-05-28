@@ -21,7 +21,7 @@
         
       
       
-      <link rel="icon" href="../assets/ltrxar_3100_logo.png">
+      <link rel="icon" href="../assets/cisco_logo.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
@@ -111,7 +111,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href=".." title="LTRXAR-3100 — Hands-On Service-as-Code" class="md-header__button md-logo" aria-label="LTRXAR-3100 — Hands-On Service-as-Code" data-md-component="logo">
       
-  <img src="../assets/ltrxar_3100_logo.png" alt="logo">
+  <img src="../assets/cisco_logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -367,7 +367,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="LTRXAR-3100 — Hands-On Service-as-Code" class="md-nav__button md-logo" aria-label="LTRXAR-3100 — Hands-On Service-as-Code" data-md-component="logo">
       
-  <img src="../assets/ltrxar_3100_logo.png" alt="logo">
+  <img src="../assets/cisco_logo.png" alt="logo">
 
     </a>
     LTRXAR-3100 — Hands-On Service-as-Code
@@ -1577,10 +1577,10 @@
 </span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">        </span><span class="nt">ips</span><span class="p">:</span>
 </span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">ip</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">198.18.140.31</span>
 </span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">        </span><span class="nt">radius</span><span class="p">:</span>
-</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">          </span><span class="nt">shared_secret</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">__PLACEHOLDER_SHARED_SECRET__</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">          </span><span class="nt">shared_secret</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">C1sco12345</span>
 </span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">        </span><span class="nt">trust_sec</span><span class="p">:</span>
-</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">          </span><span class="nt">device_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SDA-BORDER</span>
-</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">          </span><span class="nt">device_password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">__PLACEHOLDER_DEVICE_PASSWORD__</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">          </span><span class="nt">device_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">BORDER.cisco.eu</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">          </span><span class="nt">device_password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">C1sco12345</span>
 </span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">          </span><span class="nt">send_configuration_to_device</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">          </span><span class="nt">send_configuration_to_device_using</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ENABLE_USING_COA</span>
 </span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="w">          </span><span class="nt">download_sgacl_lists_every_x_seconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
@@ -1699,7 +1699,7 @@ For example:<p></p>
 <li>Navigate to <strong>Work Centers → TrustSec → Components → Security Groups</strong>. Confirm <code>IT_Admin</code> (SGT 40), <code>Servers</code> (SGT 20), and <code>Cameras</code> (SGT 30) exist.</li>
 <li>Navigate to <strong>Work Centers → TrustSec → Components → Security Group ACLs</strong>. Click on <code>PERMIT_CAMERA_STREAM</code> and confirm the ACL content.</li>
 <li>Navigate to <strong>Work Centers → TrustSec → TrustSec Policy → Egress Policy → Matrix</strong>. Confirm the four matrix entries are in place.</li>
-<li>Navigate to <strong>Administration → Network Resources → Network Devices</strong>. Confirm <code>SDA-BORDER</code>, <code>SDA-FIAB</code>, <code>SDA-EDGE-01</code>, and <code>SDA-EDGE-02</code> are registered. (Note: cEdge devices are not registered as they use CTS inline tagging).</li>
+<li>Navigate to <strong>Administration → Network Resources → Network Devices</strong>. Confirm <code>BORDER.cisco.eu</code>, <code>FIAB.cisco.eu</code>, <code>EDGE01.cisco.eu</code>, and <code>EDGE02.cisco.eu</code> are registered. (Note: cEdge devices are not registered as they use CTS inline tagging).</li>
 </ol>
 <!-- ![ISE TrustSec Matrix](./assets/ise_matrix.png) -->
 
@@ -1707,7 +1707,7 @@ For example:<p></p>
 <p>Open <code>.gitlab-ci.yml</code>. The ISE pipeline has a few notable characteristics compared to the other labs:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nt">image</span><span class="p">:</span>
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">danischm/nac:0.1.5</span><span class="w">   </span><span class="c1"># Pinned version for ISE provider compatibility</span>
-</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span><span class="nt">pull_policy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">if-not-present</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span><span class="nt">pull_policy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always</span>
 </span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
 </span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="nt">stages</span><span class="p">:</span>
 </span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">validate</span>
@@ -1717,11 +1717,12 @@ For example:<p></p>
 </span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>
 </span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="nt">variables</span><span class="p">:</span>
 </span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="w">  </span><span class="nt">GODEBUG</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">net.ipv6=off</span><span class="w">        </span><span class="c1"># Disables IPv6 (ISE provider limitation)</span>
-</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>
-</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="nt">before_script</span><span class="p">:</span>
-</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cp /etc/resolv.conf /tmp/resolv.conf</span>
-</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sed -i 's/8.8.8.8/1.1.1.1/g' /tmp/resolv.conf</span>
-</span><span id="__span-13-17"><a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cp /tmp/resolv.conf /etc/resolv.conf</span>
+</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="w">  </span><span class="nt">GIT_SSL_NO_VERIFY</span><span class="p">:</span><span class="w"> </span><span class="s">"true"</span>
+</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>
+</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="nt">before_script</span><span class="p">:</span>
+</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cp /etc/resolv.conf /tmp/resolv.conf</span>
+</span><span id="__span-13-17"><a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sed -i 's/8.8.8.8/1.1.1.1/g' /tmp/resolv.conf</span>
+</span><span id="__span-13-18"><a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cp /tmp/resolv.conf /etc/resolv.conf</span>
 </span></code></pre></div>
 <p>The <code>before_script</code> DNS patch replaces the Google DNS resolver with Cloudflare — a workaround for DNS resolution issues in some lab environments where <code>8.8.8.8</code> is unreachable.</p>
 <p>The <code>cleanup</code> stage is a <strong>manually triggered</strong> <code>terraform destroy</code> — this allows lab environments to be reset without requiring direct access to the Terraform state or ISE:</p>
@@ -1837,7 +1838,7 @@ For example:<p></p>
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright © 2025 Cisco Systems, Inc. — LTRXAR-3100 Cisco Live Lab Guide
+      Copyright © 2026 Cisco Systems, Inc. — LTRXAR-3100 Cisco Live Lab Guide
 
     </div>
   

@@ -20,7 +20,7 @@
         
       
       
-      <link rel="icon" href="../assets/ltrxar_3100_logo.png">
+      <link rel="icon" href="../assets/cisco_logo.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
@@ -106,7 +106,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href=".." title="LTRXAR-3100 — Hands-On Service-as-Code" class="md-header__button md-logo" aria-label="LTRXAR-3100 — Hands-On Service-as-Code" data-md-component="logo">
       
-  <img src="../assets/ltrxar_3100_logo.png" alt="logo">
+  <img src="../assets/cisco_logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -360,7 +360,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="LTRXAR-3100 — Hands-On Service-as-Code" class="md-nav__button md-logo" aria-label="LTRXAR-3100 — Hands-On Service-as-Code" data-md-component="logo">
       
-  <img src="../assets/ltrxar_3100_logo.png" alt="logo">
+  <img src="../assets/cisco_logo.png" alt="logo">
 
     </a>
     LTRXAR-3100 — Hands-On Service-as-Code
@@ -1205,6 +1205,10 @@
 <td>Run a unified pipeline across all three domains</td>
 </tr>
 <tr>
+<td><a href="#lab6_optional_end_to_end_testing">Lab 6 (Optional) — End-to-End Testing</a></td>
+<td>Optional end-to-end testing of the multi-domain integration</td>
+</tr>
+<tr>
 <td><a href="#conclusion">Conclusion</a></td>
 <td>Summary and related Cisco Live sessions</td>
 </tr>
@@ -1335,9 +1339,9 @@
 <p class="admonition-title">Important</p>
 <p>Each workstation has a unique dCloud <strong>Session ID</strong> and <strong>VPN credentials</strong>. You will have to VPN to your virtual lab in order to access all the components of the lab environment.</p>
 </div>
-<p><strong>Step 1 — Connect to your dCloud Session via VPN</strong></p>
+<h2 id="overview-step-1-connect-to-your-dcloud-session-via-vpn">Step 1: Connect to your dCloud Session via VPN<a class="headerlink" href="#overview-step-1-connect-to-your-dcloud-session-via-vpn" title="Permanent link">¶</a></h2>
 <p>Using the <strong>Instructor-Led Lab Assistant</strong>, establish a VPN connection to your assigned dCloud Session. If you do not know your dCloud Session ID, contact your proctor.</p>
-<p><strong>Step 2 — RDP to the Windows Workstation</strong></p>
+<h2 id="overview-step-2-rdp-to-the-windows-workstation">Step 2: RDP to the Windows Workstation<a class="headerlink" href="#overview-step-2-rdp-to-the-windows-workstation" title="Permanent link">¶</a></h2>
 <p>From your local machine, open a Remote Desktop Protocol (RDP) session to the Windows VM:</p>
 <ul>
 <li><strong>IP:</strong> <code>198.18.133.10</code></li>
@@ -1370,15 +1374,15 @@
 </table>
 <p>If the CML lab is not powered in, click on the triangle icon to power it on. By the time you start pushing the configuration to the CML lab, it will be powered on.</p>
 </div>
-<h2 id="overview-getting-started">Getting Started<a class="headerlink" href="#overview-getting-started" title="Permanent link">¶</a></h2>
+<h2 id="overview-step-3-getting-started">Step 3: Getting Started<a class="headerlink" href="#overview-step-3-getting-started" title="Permanent link">¶</a></h2>
 <p>If you are not aware of it, as an option, read through the <a href="#introduction">Introduction</a> to understand the Net-as-Code methodology before starting the labs. Additional documentation is available on the <a href="https://netascode.cisco.com/">Net-as-Code website</a>.</p>
 <p>The labs are designed to be completed in order:</p>
 <ol>
-<li><strong>Lab 1 — ACI as Code</strong> — Start here to learn the data model pattern</li>
-<li><strong>Lab 2 — SD-WAN as Code</strong> — Apply the same pattern to SD-WAN feature templates</li>
-<li><strong>Lab 3 — Catalyst Center as Code</strong> — Extend to SDA fabric provisioning</li>
-<li><strong>Lab 4 — ISE as Code</strong> — Configure TrustSec policy</li>
-<li><strong>Lab 5 — Multi-Domain Integration</strong> — Run the unified cross-domain pipeline</li>
+<li><strong>Lab 1: ACI as Code</strong> - Start here to learn the data model pattern</li>
+<li><strong>Lab 2: SD-WAN as Code</strong> - Apply the same pattern to SD-WAN feature templates</li>
+<li><strong>Lab 3: Catalyst Center as Code</strong> - Extend to SDA fabric provisioning</li>
+<li><strong>Lab 4: ISE as Code</strong> - Configure TrustSec policy</li>
+<li><strong>Lab 5: Multi-Domain Integration</strong> - Run the unified cross-domain pipeline</li>
 </ol>
 <p>Each lab repository is publicly available on GitHub. You will clone the public repository to your workstation as we progress in the labs. Explore the code, then push it to the GitLab instance in the lab environment where the CI/CD pipeline will deploy the configuration automatically.</p></body></html></section><section class="print-page" id="introduction" heading-number="2.2"><html><head>
         <script type="text/javascript">
@@ -2002,15 +2006,23 @@ You may see certificate warnings and a message about unencrypted HTTP. This is e
 </ul>
 <h2 id="lab2_sdwan-repository-structure">Repository Structure<a class="headerlink" href="#lab2_sdwan-repository-structure" title="Permanent link">¶</a></h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#lab2_sdwan-__codelineno-0-1"></a>ltrxar-3100-sdwan/
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#lab2_sdwan-__codelineno-0-2"></a>├── main.tf                              # Terraform entry point
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#lab2_sdwan-__codelineno-0-2"></a>├── main.tf                                           # Terraform entry point
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#lab2_sdwan-__codelineno-0-3"></a>├── data/
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#lab2_sdwan-__codelineno-0-4"></a>│   └── edge_feature_templates.nac.yaml  # VPN and interface feature templates
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#lab2_sdwan-__codelineno-0-5"></a>├── defaults/                            # Default values for the module
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#lab2_sdwan-__codelineno-0-6"></a>├── schemas/                             # JSON Schema for YAML validation
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#lab2_sdwan-__codelineno-0-7"></a>├── templates/                           # Jinja2 test templates for post-deploy checks
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#lab2_sdwan-__codelineno-0-8"></a>├── validation/                          # pytest-based semantic tests
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#lab2_sdwan-__codelineno-0-9"></a>└── .gitlab-ci.yml                       # CI/CD pipeline definition
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#lab2_sdwan-__codelineno-0-4"></a>│   └── edge_feature_templates.nac.yaml               # Base feature templates
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#lab2_sdwan-__codelineno-0-5"></a>├── backup_data/
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#lab2_sdwan-__codelineno-0-6"></a>│   ├── multidomain_edge_feature_templates.nac.yaml   # Multi-domain feature templates
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#lab2_sdwan-__codelineno-0-7"></a>│   ├── multidomain_edge_device_templates.nac.yaml    # Multi-domain device templates
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#lab2_sdwan-__codelineno-0-8"></a>│   └── multidomain_sites.nac.yaml                    # Multi-domain sites
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#lab2_sdwan-__codelineno-0-9"></a>├── defaults/                                         # Default values for the module
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#lab2_sdwan-__codelineno-0-10"></a>├── schemas/                                          # JSON Schema for YAML validation
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#lab2_sdwan-__codelineno-0-11"></a>├── templates/                                        # Jinja2 test templates for post-deploy checks
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#lab2_sdwan-__codelineno-0-12"></a>├── validation/                                       # pytest-based semantic tests
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#lab2_sdwan-__codelineno-0-13"></a>└── .gitlab-ci.yml                                    # CI/CD pipeline definition
 </span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code>backup_data/</code> directory contains the feature templates and device templates that will be activated in Lab 5 (Multi-Domain Integration). In this lab, you will only deploy the base feature templates.</p>
+</div>
 <h2 id="lab2_sdwan-step-1-connect-to-the-windows-workstation">Step 1: Connect to the Windows Workstation<a class="headerlink" href="#lab2_sdwan-step-1-connect-to-the-windows-workstation" title="Permanent link">¶</a></h2>
 <p>If you have closed the RDP session from Lab 1, reconnect:</p>
 <ul>
@@ -2553,17 +2565,22 @@ For example:<p></p>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#lab3_catc-__codelineno-0-3"></a>├── data/
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#lab3_catc-__codelineno-0-4"></a>│   ├── sites.nac.yaml              # Site hierarchy (areas, buildings, floors)
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#lab3_catc-__codelineno-0-5"></a>│   ├── network_settings.nac.yaml   # IP pools, AAA settings, telemetry
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#lab3_catc-__codelineno-0-6"></a>│   └── templates/                  # Day-N CLI templates
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#lab3_catc-__codelineno-0-7"></a>├── backup_data/                    # Multi-domain files (used in Lab 5)
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#lab3_catc-__codelineno-0-8"></a>│   ├── multidomain_fabric.nac.yaml # Fabric sites, L3 VNs, anycast gateways, L3 handoffs
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#lab3_catc-__codelineno-0-9"></a>│   └── multidomain_devices.nac.yaml# Device inventory and fabric role assignments
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#lab3_catc-__codelineno-0-10"></a>├── defaults/                       # Default values for the module
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#lab3_catc-__codelineno-0-11"></a>├── schemas/                        # JSON Schema for YAML validation
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#lab3_catc-__codelineno-0-12"></a>├── templates/                      # Jinja2 test templates for post-deploy checks
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#lab3_catc-__codelineno-0-13"></a>├── validation/                     # pytest-based semantic tests
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#lab3_catc-__codelineno-0-14"></a>└── .gitlab-ci.yml                  # CI/CD pipeline definition
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#lab3_catc-__codelineno-0-6"></a>│   ├── network_profiles.nac.yaml   # Network profiles
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#lab3_catc-__codelineno-0-7"></a>│   ├── templates.nac.yaml          # Templates for projects and templates
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#lab3_catc-__codelineno-0-8"></a>│   └── templates/                  # Day-N CLI templates
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#lab3_catc-__codelineno-0-9"></a>├── backup_data/                    # Multi-domain files (used in Lab 5)
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#lab3_catc-__codelineno-0-10"></a>│   ├── multidomain_fabric.nac.yaml # Fabric sites, L3 VNs, anycast gateways, L3 handoffs
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#lab3_catc-__codelineno-0-11"></a>│   └── multidomain_devices.nac.yaml# Device inventory and fabric role assignments
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#lab3_catc-__codelineno-0-12"></a>├── defaults/                       # Default values for the module
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#lab3_catc-__codelineno-0-13"></a>├── schemas/                        # JSON Schema for YAML validation
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#lab3_catc-__codelineno-0-14"></a>├── templates/                      # Jinja2 test templates for post-deploy checks
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#lab3_catc-__codelineno-0-15"></a>├── validation/                     # pytest-based semantic tests
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#lab3_catc-__codelineno-0-16"></a>└── .gitlab-ci.yml                  # CI/CD pipeline definition
 </span></code></pre></div>
-<p><strong>Note:</strong> The <code>backup_data/</code> directory contains the fabric provisioning and device inventory files that will be activated in Lab 5 (Multi-Domain Integration). In this lab, you will only deploy the site hierarchy and network settings.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code>backup_data/</code> directory contains the fabric provisioning and device inventory files that will be activated in Lab 5 (Multi-Domain Integration). In this lab, you will only deploy the site hierarchy, network settings, and network profiles.</p>
+</div>
 <h2 id="lab3_catc-step-1-connect-to-the-windows-workstation">Step 1: Connect to the Windows Workstation<a class="headerlink" href="#lab3_catc-step-1-connect-to-the-windows-workstation" title="Permanent link">¶</a></h2>
 <p>If you have closed the RDP session, reconnect:</p>
 <ul>
@@ -3077,10 +3094,10 @@ For example:<p></p>
 </span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#lab4_ise-__codelineno-7-6"></a><span class="w">        </span><span class="nt">ips</span><span class="p">:</span>
 </span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#lab4_ise-__codelineno-7-7"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">ip</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">198.18.140.31</span>
 </span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#lab4_ise-__codelineno-7-8"></a><span class="w">        </span><span class="nt">radius</span><span class="p">:</span>
-</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#lab4_ise-__codelineno-7-9"></a><span class="w">          </span><span class="nt">shared_secret</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">__PLACEHOLDER_SHARED_SECRET__</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#lab4_ise-__codelineno-7-9"></a><span class="w">          </span><span class="nt">shared_secret</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">C1sco12345</span>
 </span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#lab4_ise-__codelineno-7-10"></a><span class="w">        </span><span class="nt">trust_sec</span><span class="p">:</span>
-</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#lab4_ise-__codelineno-7-11"></a><span class="w">          </span><span class="nt">device_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SDA-BORDER</span>
-</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#lab4_ise-__codelineno-7-12"></a><span class="w">          </span><span class="nt">device_password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">__PLACEHOLDER_DEVICE_PASSWORD__</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#lab4_ise-__codelineno-7-11"></a><span class="w">          </span><span class="nt">device_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">BORDER.cisco.eu</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#lab4_ise-__codelineno-7-12"></a><span class="w">          </span><span class="nt">device_password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">C1sco12345</span>
 </span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#lab4_ise-__codelineno-7-13"></a><span class="w">          </span><span class="nt">send_configuration_to_device</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#lab4_ise-__codelineno-7-14"></a><span class="w">          </span><span class="nt">send_configuration_to_device_using</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ENABLE_USING_COA</span>
 </span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#lab4_ise-__codelineno-7-15"></a><span class="w">          </span><span class="nt">download_sgacl_lists_every_x_seconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
@@ -3199,7 +3216,7 @@ For example:<p></p>
 <li>Navigate to <strong>Work Centers → TrustSec → Components → Security Groups</strong>. Confirm <code>IT_Admin</code> (SGT 40), <code>Servers</code> (SGT 20), and <code>Cameras</code> (SGT 30) exist.</li>
 <li>Navigate to <strong>Work Centers → TrustSec → Components → Security Group ACLs</strong>. Click on <code>PERMIT_CAMERA_STREAM</code> and confirm the ACL content.</li>
 <li>Navigate to <strong>Work Centers → TrustSec → TrustSec Policy → Egress Policy → Matrix</strong>. Confirm the four matrix entries are in place.</li>
-<li>Navigate to <strong>Administration → Network Resources → Network Devices</strong>. Confirm <code>SDA-BORDER</code>, <code>SDA-FIAB</code>, <code>SDA-EDGE-01</code>, and <code>SDA-EDGE-02</code> are registered. (Note: cEdge devices are not registered as they use CTS inline tagging).</li>
+<li>Navigate to <strong>Administration → Network Resources → Network Devices</strong>. Confirm <code>BORDER.cisco.eu</code>, <code>FIAB.cisco.eu</code>, <code>EDGE01.cisco.eu</code>, and <code>EDGE02.cisco.eu</code> are registered. (Note: cEdge devices are not registered as they use CTS inline tagging).</li>
 </ol>
 <!-- ![ISE TrustSec Matrix](./assets/ise_matrix.png) -->
 
@@ -3207,7 +3224,7 @@ For example:<p></p>
 <p>Open <code>.gitlab-ci.yml</code>. The ISE pipeline has a few notable characteristics compared to the other labs:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#lab4_ise-__codelineno-13-1"></a><span class="nt">image</span><span class="p">:</span>
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#lab4_ise-__codelineno-13-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">danischm/nac:0.1.5</span><span class="w">   </span><span class="c1"># Pinned version for ISE provider compatibility</span>
-</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#lab4_ise-__codelineno-13-3"></a><span class="w">  </span><span class="nt">pull_policy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">if-not-present</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#lab4_ise-__codelineno-13-3"></a><span class="w">  </span><span class="nt">pull_policy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always</span>
 </span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#lab4_ise-__codelineno-13-4"></a>
 </span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#lab4_ise-__codelineno-13-5"></a><span class="nt">stages</span><span class="p">:</span>
 </span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#lab4_ise-__codelineno-13-6"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">validate</span>
@@ -3217,11 +3234,12 @@ For example:<p></p>
 </span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#lab4_ise-__codelineno-13-10"></a>
 </span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#lab4_ise-__codelineno-13-11"></a><span class="nt">variables</span><span class="p">:</span>
 </span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#lab4_ise-__codelineno-13-12"></a><span class="w">  </span><span class="nt">GODEBUG</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">net.ipv6=off</span><span class="w">        </span><span class="c1"># Disables IPv6 (ISE provider limitation)</span>
-</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#lab4_ise-__codelineno-13-13"></a>
-</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#lab4_ise-__codelineno-13-14"></a><span class="nt">before_script</span><span class="p">:</span>
-</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#lab4_ise-__codelineno-13-15"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cp /etc/resolv.conf /tmp/resolv.conf</span>
-</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#lab4_ise-__codelineno-13-16"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sed -i 's/8.8.8.8/1.1.1.1/g' /tmp/resolv.conf</span>
-</span><span id="__span-13-17"><a id="__codelineno-13-17" name="__codelineno-13-17" href="#lab4_ise-__codelineno-13-17"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cp /tmp/resolv.conf /etc/resolv.conf</span>
+</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#lab4_ise-__codelineno-13-13"></a><span class="w">  </span><span class="nt">GIT_SSL_NO_VERIFY</span><span class="p">:</span><span class="w"> </span><span class="s">"true"</span>
+</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#lab4_ise-__codelineno-13-14"></a>
+</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#lab4_ise-__codelineno-13-15"></a><span class="nt">before_script</span><span class="p">:</span>
+</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#lab4_ise-__codelineno-13-16"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cp /etc/resolv.conf /tmp/resolv.conf</span>
+</span><span id="__span-13-17"><a id="__codelineno-13-17" name="__codelineno-13-17" href="#lab4_ise-__codelineno-13-17"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sed -i 's/8.8.8.8/1.1.1.1/g' /tmp/resolv.conf</span>
+</span><span id="__span-13-18"><a id="__codelineno-13-18" name="__codelineno-13-18" href="#lab4_ise-__codelineno-13-18"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cp /tmp/resolv.conf /etc/resolv.conf</span>
 </span></code></pre></div>
 <p>The <code>before_script</code> DNS patch replaces the Google DNS resolver with Cloudflare — a workaround for DNS resolution issues in some lab environments where <code>8.8.8.8</code> is unreachable.</p>
 <p>The <code>cleanup</code> stage is a <strong>manually triggered</strong> <code>terraform destroy</code> — this allows lab environments to be reset without requiring direct access to the Terraform state or ISE:</p>
@@ -3395,7 +3413,7 @@ For example:<p></p>
 </span></code></pre></div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Wait for the Catalyst Center pipeline to complete its <strong>validate</strong> and <strong>plan</strong> stages before proceeding. Don't trigger the deploy yet. The multidomain orchestrator will handle the deployment sequence.</p>
+<p>Wait for the Catalyst Center and SDWAN pipelines to complete its <strong>validate</strong> and <strong>plan</strong> stages before proceeding. Don't trigger the deploy yet. The multidomain orchestrator will handle the deployment sequence.</p>
 </div>
 <h2 id="lab5_multidomain-step-5-explore-the-catalyst-center-multi-domain-data">Step 5: Explore the Catalyst Center Multi-Domain Data<a class="headerlink" href="#lab5_multidomain-step-5-explore-the-catalyst-center-multi-domain-data" title="Permanent link">¶</a></h2>
 <p>Open <code>data/multidomain_fabric.nac.yaml</code> in the <code>ltrxar-3100-catalystcenter</code> repository.</p>
@@ -3482,42 +3500,57 @@ For example:<p></p>
 <p>Navigate to <strong>Provision → Fabric Sites → Bld B → Border Devices</strong>. Confirm <code>FIAB.cisco.eu</code> shows the L3 handoff on VLAN 3050.</p>
 <h3 id="lab5_multidomain-sd-wan-manager-bgp-status">SD-WAN Manager — BGP Status<a class="headerlink" href="#lab5_multidomain-sd-wan-manager-bgp-status" title="Permanent link">¶</a></h3>
 <p>Open SD-WAN Manager: <code>https://198.18.185.11</code> (admin / C1sco12345).</p>
-<p>Navigate to <strong>Monitor → Devices</strong>. Select <code>C-EDGE-01</code> and verify the BGP session toward <code>10.100.50.1</code> (<code>FIAB.cisco.eu</code>) is <code>Established</code>.</p>
-<p>Select <code>C-EDGE-02</code> and verify the BGP session toward <code>10.100.30.1</code> (<code>BORDER.cisco.eu</code>) is <code>Established</code>.</p>
+<p>Navigate to <strong>Monitor → Devices → C-EDGE-01 → Events</strong>. Verify the BGP session toward <code>10.100.50.1</code> (<code>FIAB.cisco.eu</code>) is <code>Established</code>.</p>
+<p>Navigate to <strong>Monitor → Devices → C-EDGE-02 → Events</strong>. Verify the BGP session toward <code>10.100.30.1</code> (<code>BORDER.cisco.eu</code>) is <code>Established</code>.</p>
+<h3 id="lab5_multidomain-catalyst-center-phase-4-push-cts-bootstrap-template">Catalyst Center Phase 4: Push CTS Bootstrap Template<a class="headerlink" href="#lab5_multidomain-catalyst-center-phase-4-push-cts-bootstrap-template" title="Permanent link">¶</a></h3>
+<p>In your <code>ltrxar-3100-catc</code> local clone, open <code>data/multidomain_devices.nac.yaml</code> and uncomment the <code>dayn_templates:</code> block for <code>BORDER.cisco.eu</code> and <code>FIAB.cisco.eu</code>.</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#lab5_multidomain-__codelineno-10-1"></a><span class="w">        </span><span class="c1"># Phase 4: uncomment to push CTS bootstrap template</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#lab5_multidomain-__codelineno-10-2"></a><span class="w">        </span><span class="c1"># dayn_templates:</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#lab5_multidomain-__codelineno-10-3"></a><span class="w">        </span><span class="c1">#   regular:</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#lab5_multidomain-__codelineno-10-4"></a><span class="w">        </span><span class="c1">#     - name: cts-bootstrap</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#lab5_multidomain-__codelineno-10-5"></a><span class="w">        </span><span class="c1">#       variables:</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#lab5_multidomain-__codelineno-10-6"></a><span class="w">        </span><span class="c1">#         - name: device_name</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#lab5_multidomain-__codelineno-10-7"></a><span class="w">        </span><span class="c1">#           value: BORDER.cisco.eu</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#lab5_multidomain-__codelineno-10-8"></a><span class="w">        </span><span class="c1">#         - name: cts_password</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#lab5_multidomain-__codelineno-10-9"></a><span class="w">        </span><span class="c1">#           value: C1sco12345</span>
+</span></code></pre></div>
+<p>Once the changes are made, commit these changes and push to GitLab:
+</p><div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#lab5_multidomain-__codelineno-11-1"></a>git<span class="w"> </span>add<span class="w"> </span>data/multidomain_devices.nac.yaml
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#lab5_multidomain-__codelineno-11-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Push CTS bootstrap template for SDA Edge devices"</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#lab5_multidomain-__codelineno-11-3"></a>git<span class="w"> </span>push<span class="w"> </span>gitlab<span class="w"> </span>main
+</span></code></pre></div><p></p>
+<p>A new pipeline run starts automatically. The <strong>plan</strong> stage shows exactly one new resource. Trigger the <strong>deploy</strong> job in Catalyst Center repository and verify the CTS bootstrap template is pushed to the fabric devices.</p>
 <h3 id="lab5_multidomain-ise-trustsec-propagation">ISE — TrustSec Propagation<a class="headerlink" href="#lab5_multidomain-ise-trustsec-propagation" title="Permanent link">¶</a></h3>
-<p>Navigate to <strong>Work Centers → TrustSec → SXP</strong> and verify that the static IP-SGT mappings are being propagated to the network devices.</p>
-<h2 id="lab5_multidomain-step-11-simulate-an-end-to-end-policy-change">Step 11: Simulate an End-to-End Policy Change<a class="headerlink" href="#lab5_multidomain-step-11-simulate-an-end-to-end-policy-change" title="Permanent link">¶</a></h2>
-<p>To demonstrate the full pipeline operational model, add a new <code>PCI</code> zone (SGT 50) isolated from the <code>IT_Admin</code> (SGT 40) and <code>Cameras</code> (SGT 30) zones.</p>
 <ol>
-<li>In your <code>ltrxar-3100-ise</code> local clone, open <code>data/trust_sec.nac.yaml</code> and add:</li>
+<li>In your <code>ltrxar-3100-ise</code> local clone, open <code>data/trust_sec.nac.yaml</code> and add the following:</li>
 </ol>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#lab5_multidomain-__codelineno-10-1"></a><span class="nt">security_groups</span><span class="p">:</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#lab5_multidomain-__codelineno-10-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PCI</span>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#lab5_multidomain-__codelineno-10-3"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PCI-scoped payment processing servers</span>
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#lab5_multidomain-__codelineno-10-4"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50</span>
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#lab5_multidomain-__codelineno-10-5"></a>
-</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#lab5_multidomain-__codelineno-10-6"></a><span class="nt">security_group_acls</span><span class="p">:</span>
-</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#lab5_multidomain-__codelineno-10-7"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DENY_PCI_INBOUND</span>
-</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#lab5_multidomain-__codelineno-10-8"></a><span class="w">    </span><span class="nt">ip_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IP_AGNOSTIC</span>
-</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#lab5_multidomain-__codelineno-10-9"></a><span class="w">    </span><span class="nt">acl_content</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#lab5_multidomain-__codelineno-10-10"></a><span class="w">      </span><span class="no">deny ip log</span>
-</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#lab5_multidomain-__codelineno-10-11"></a>
-</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#lab5_multidomain-__codelineno-10-12"></a><span class="nt">matrix_entries</span><span class="p">:</span>
-</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#lab5_multidomain-__codelineno-10-13"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_sgt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IT_Admin</span>
-</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#lab5_multidomain-__codelineno-10-14"></a><span class="w">    </span><span class="nt">destination_sgt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PCI</span>
-</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#lab5_multidomain-__codelineno-10-15"></a><span class="w">    </span><span class="nt">sgacl_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DENY_PCI_INBOUND</span>
-</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16" href="#lab5_multidomain-__codelineno-10-16"></a><span class="w">    </span><span class="nt">rule_status</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ENABLED</span>
-</span><span id="__span-10-17"><a id="__codelineno-10-17" name="__codelineno-10-17" href="#lab5_multidomain-__codelineno-10-17"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_sgt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Cameras</span>
-</span><span id="__span-10-18"><a id="__codelineno-10-18" name="__codelineno-10-18" href="#lab5_multidomain-__codelineno-10-18"></a><span class="w">    </span><span class="nt">destination_sgt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PCI</span>
-</span><span id="__span-10-19"><a id="__codelineno-10-19" name="__codelineno-10-19" href="#lab5_multidomain-__codelineno-10-19"></a><span class="w">    </span><span class="nt">sgacl_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DENY_PCI_INBOUND</span>
-</span><span id="__span-10-20"><a id="__codelineno-10-20" name="__codelineno-10-20" href="#lab5_multidomain-__codelineno-10-20"></a><span class="w">    </span><span class="nt">rule_status</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ENABLED</span>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#lab5_multidomain-__codelineno-12-1"></a><span class="nt">security_groups</span><span class="p">:</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#lab5_multidomain-__codelineno-12-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PCI</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#lab5_multidomain-__codelineno-12-3"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PCI-scoped payment processing servers</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#lab5_multidomain-__codelineno-12-4"></a><span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#lab5_multidomain-__codelineno-12-5"></a>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#lab5_multidomain-__codelineno-12-6"></a><span class="nt">security_group_acls</span><span class="p">:</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#lab5_multidomain-__codelineno-12-7"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DENY_PCI_INBOUND</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#lab5_multidomain-__codelineno-12-8"></a><span class="w">    </span><span class="nt">ip_version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IP_AGNOSTIC</span>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#lab5_multidomain-__codelineno-12-9"></a><span class="w">    </span><span class="nt">acl_content</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#lab5_multidomain-__codelineno-12-10"></a><span class="w">      </span><span class="no">deny ip log</span>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#lab5_multidomain-__codelineno-12-11"></a>
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#lab5_multidomain-__codelineno-12-12"></a><span class="nt">matrix_entries</span><span class="p">:</span>
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#lab5_multidomain-__codelineno-12-13"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_sgt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IT_Admin</span>
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#lab5_multidomain-__codelineno-12-14"></a><span class="w">    </span><span class="nt">destination_sgt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PCI</span>
+</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15" href="#lab5_multidomain-__codelineno-12-15"></a><span class="w">    </span><span class="nt">sgacl_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DENY_PCI_INBOUND</span>
+</span><span id="__span-12-16"><a id="__codelineno-12-16" name="__codelineno-12-16" href="#lab5_multidomain-__codelineno-12-16"></a><span class="w">    </span><span class="nt">rule_status</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ENABLED</span>
+</span><span id="__span-12-17"><a id="__codelineno-12-17" name="__codelineno-12-17" href="#lab5_multidomain-__codelineno-12-17"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">source_sgt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Cameras</span>
+</span><span id="__span-12-18"><a id="__codelineno-12-18" name="__codelineno-12-18" href="#lab5_multidomain-__codelineno-12-18"></a><span class="w">    </span><span class="nt">destination_sgt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PCI</span>
+</span><span id="__span-12-19"><a id="__codelineno-12-19" name="__codelineno-12-19" href="#lab5_multidomain-__codelineno-12-19"></a><span class="w">    </span><span class="nt">sgacl_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DENY_PCI_INBOUND</span>
+</span><span id="__span-12-20"><a id="__codelineno-12-20" name="__codelineno-12-20" href="#lab5_multidomain-__codelineno-12-20"></a><span class="w">    </span><span class="nt">rule_status</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ENABLED</span>
 </span></code></pre></div>
 <ol>
 <li>Commit and push to GitLab:</li>
 </ol>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#lab5_multidomain-__codelineno-11-1"></a>git<span class="w"> </span>add<span class="w"> </span>data/trust_sec.nac.yaml
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#lab5_multidomain-__codelineno-11-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Add PCI zone isolation (SGT 50)"</span>
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#lab5_multidomain-__codelineno-11-3"></a>git<span class="w"> </span>push<span class="w"> </span>gitlab<span class="w"> </span>main
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#lab5_multidomain-__codelineno-13-1"></a>git<span class="w"> </span>add<span class="w"> </span>data/trust_sec.nac.yaml
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#lab5_multidomain-__codelineno-13-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Add PCI zone isolation (SGT 50)"</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#lab5_multidomain-__codelineno-13-3"></a>git<span class="w"> </span>push<span class="w"> </span>gitlab<span class="w"> </span>main
 </span></code></pre></div>
 <ol>
 <li>
@@ -3582,6 +3615,11 @@ For example:<p></p>
 <td>Multi-Domain</td>
 <td>BGP transit, L3 handoffs (CATC borders ↔ SD-WAN edges), device templates</td>
 </tr>
+<tr>
+<td>Lab 6</td>
+<td>End-to-End Testing</td>
+<td>End-to-end testing of the multi-domain integration</td>
+</tr>
 </tbody>
 </table>
 <p>Every configuration object was defined in a YAML data file, validated against a JSON Schema, planned with <code>terraform plan</code>, and deployed with <code>terraform apply</code> — reproducibly and without manual GUI interaction.</p>
@@ -3600,6 +3638,7 @@ For example:<p></p>
 </ul>
 <h2 id="conclusion-related-sessions-at-cisco-live">Related Sessions at Cisco Live<a class="headerlink" href="#conclusion-related-sessions-at-cisco-live" title="Permanent link">¶</a></h2>
 <ul>
+<li><a href="https://www.ciscolive.com/emea/learn/session-catalog.html?search=LTRENS-3751">LTRENS-3751</a> — Automating SD-Access Fabric Deployment with Cisco Catalyst Center, ISE, and Terraform</li>
 <li><a href="https://www.ciscolive.com/emea/learn/session-catalog.html?search=LTRATO-2223">LTRATO-2223</a> — FastForward SD-WAN Deployment and Management with SD-WAN as Code</li>
 <li><a href="https://www.ciscolive.com/emea/learn/session-catalog.html?search=LTRDCN-2459">LTRDCN-2459</a> — Cross-Technology Automation of ACI and FMC with Network-as-Code from Day 0 to Day 2</li>
 <li><a href="https://www.ciscolive.com/emea/learn/session-catalog.html?search=TECSEC-2834">TECSEC-2834</a> — Optimizing Cisco Security: Automate Provisioning and Configuration with Ansible and Terraform</li>
@@ -3736,7 +3775,7 @@ For example:<p></p>
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright &copy; 2025 Cisco Systems, Inc. — LTRXAR-3100 Cisco Live Lab Guide
+      Copyright &copy; 2026 Cisco Systems, Inc. — LTRXAR-3100 Cisco Live Lab Guide
 
     </div>
   

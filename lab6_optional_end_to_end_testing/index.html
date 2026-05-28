@@ -9,13 +9,9 @@
         <meta name="author" content="Cisco Live">
       
       
-        <link rel="canonical" href="https://cisco-docs.github.io/ltrxar-3100-lab-guide/introduction/">
+        <link rel="canonical" href="https://cisco-docs.github.io/ltrxar-3100-lab-guide/lab6_optional_end_to_end_testing/">
       
       
-        <link rel="prev" href="../overview/">
-      
-      
-        <link rel="next" href="../lab1_aci/">
       
       
         
@@ -26,7 +22,7 @@
     
     
       
-        <title>Introduction - LTRXAR-3100 — Hands-On Service-as-Code</title>
+        <title>Lab 6 — Optional End-to-End Testing - LTRXAR-3100 — Hands-On Service-as-Code</title>
       
     
     
@@ -93,7 +89,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#introduction" class="md-skip">
+        <a href="#lab-6-optional-end-to-end-testing" class="md-skip">
           Skip to content
         </a>
       
@@ -128,7 +124,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Introduction
+              Lab 6 — Optional End-to-End Testing
             
           </span>
         </div>
@@ -257,12 +253,10 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
+      <li class="md-tabs__item">
         <a href="../overview/" class="md-tabs__link">
           
   
@@ -418,10 +412,8 @@
       
   
   
-    
   
   
-  
     
     
       
@@ -433,22 +425,21 @@
     
     
       
-        
-        
-      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked="">
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
             
   
   
@@ -466,7 +457,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -509,37 +500,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Introduction
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../introduction/" class="md-nav__link">
         
   
   
@@ -555,161 +519,6 @@
   
 
       </a>
-      
-        
-
-  
-
-<nav class="md-nav md-nav--secondary" aria-label="On this page">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      On this page
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-      
-        <li class="md-nav__item">
-  <a href="#what-is-net-as-code" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What Is Net-as-Code?
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-data-logic-separation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The Data / Logic Separation
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="The Data / Logic Separation">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#example-catalyst-center-as-code" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example: Catalyst Center as Code
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-net-as-code-workflow" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The Net-as-Code Workflow
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#repository-structure" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Repository Structure
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-four-domain-modules-in-this-lab" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The Four Domain Modules in This Lab
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="The Four Domain Modules in This Lab">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#aci-as-code" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ACI as Code
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sd-wan-as-code" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        SD-WAN as Code
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#catalyst-center-as-code" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Catalyst Center as Code
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ise-as-code" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ISE as Code
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-you-will-build" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What You Will Build
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1018,10 +827,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
       
         <li class="md-nav__item">
-  <a href="#what-is-net-as-code" class="md-nav__link">
+  <a href="#lab-objectives" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What Is Net-as-Code?
+        Lab Objectives
       
     </span>
   </a>
@@ -1029,38 +838,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-data-logic-separation" class="md-nav__link">
+  <a href="#step-1-connect-to-cml-console" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The Data / Logic Separation
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="The Data / Logic Separation">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#example-catalyst-center-as-code" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example: Catalyst Center as Code
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-net-as-code-workflow" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The Net-as-Code Workflow
+        Step 1: Connect to CML Console
       
     </span>
   </a>
@@ -1068,10 +849,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#repository-structure" class="md-nav__link">
+  <a href="#step-2-edge01-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Repository Structure
+        Step 2: EDGE01 Configuration
       
     </span>
   </a>
@@ -1079,71 +860,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-four-domain-modules-in-this-lab" class="md-nav__link">
+  <a href="#step-3-edge02-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The Four Domain Modules in This Lab
+        Step 3: EDGE02 Configuration
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="The Four Domain Modules in This Lab">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#aci-as-code" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ACI as Code
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sd-wan-as-code" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        SD-WAN as Code
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#catalyst-center-as-code" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Catalyst Center as Code
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ise-as-code" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ISE as Code
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-you-will-build" class="md-nav__link">
+  <a href="#step-4-fiab-configuration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What You Will Build
+        Step 4: FIAB Configuration
       
     </span>
   </a>
@@ -1167,128 +898,190 @@
 
 
 
-<h1 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">¶</a></h1>
-<p>Cisco's modern controller platforms — ACI, SD-WAN Manager, Catalyst Center, and ISE — all expose rich APIs. The challenge is not whether automation is possible, but how to do it consistently, repeatably, and safely across domains. This lab answers that question using the <strong>Net-as-Code</strong> methodology.</p>
-<h2 id="what-is-net-as-code">What Is Net-as-Code?<a class="headerlink" href="#what-is-net-as-code" title="Permanent link">¶</a></h2>
-<p>Net-as-Code is Cisco's opinionated approach to managing network infrastructure using Infrastructure as Code (IaC) principles. It is built on top of <strong>HashiCorp Terraform</strong> and a set of purpose-built Terraform modules — one for each controller domain:</p>
+<h1 id="lab-6-optional-end-to-end-testing">Lab 6 — Optional End-to-End Testing<a class="headerlink" href="#lab-6-optional-end-to-end-testing" title="Permanent link">¶</a></h1>
+<p>In this lab, you will be performing end-to-end testing of the multi-domain integration. You will be testing the reachability between the sites and ensuring following:</p>
+<div class="admonition warning">
+<p class="admonition-title">Prerequisite</p>
+<p>Complete Labs 1 through 5 before starting this lab.</p>
+</div>
+<h2 id="lab-objectives">Lab Objectives<a class="headerlink" href="#lab-objectives" title="Permanent link">¶</a></h2>
+<p>After completing this lab, you will be able to:</p>
+<ul>
+<li>End-to-end propagation of SGTs from ISE to the network devices</li>
+<li>End-to-end reachability between the sites</li>
+<li>Policy enforcement between the endpoints</li>
+<li>The intention is to ensure deivces like laptops cannot access IoT devices, however they can access the servers which in turn can access the IoT devices. </li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">CML Limitations</p>
+<p>Current version of CML and Catalyst 9000 virtual switch could porvide inconsistent results in the lab environment. Full end-to-end testing works, but there might be some caveats. The steps described below require logging into the device directly using CML interface and opening a console session to the device. Due to caching issues, the commands you apply may be time sensitive as the ARP times out and end-to-end ping would fail. You can re-do the steps again to reproduce the results.</p>
+</div>
+<h2 id="step-1-connect-to-cml-console">Step 1: Connect to CML Console<a class="headerlink" href="#step-1-connect-to-cml-console" title="Permanent link">¶</a></h2>
+<p>From your RDP session, open a web browser and navigate to https://198.18.128.27 (or click on the CML bookmark on the browser) to access the Cisco Modeling Lab. Log in using the following credentials:</p>
 <table>
 <thead>
 <tr>
-<th>Module</th>
-<th>Controller</th>
-<th>Terraform Registry</th>
+<th>Device Name</th>
+<th>URL</th>
+<th>Username</th>
+<th>Password</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>nac-aci</code></td>
-<td>Cisco ACI (APIC)</td>
-<td><code>netascode/nac-aci/aci</code></td>
-</tr>
-<tr>
-<td><code>nac-sdwan</code></td>
-<td>Cisco SD-WAN</td>
-<td><code>netascode/nac-sdwan/sdwan</code></td>
-</tr>
-<tr>
-<td><code>nac-catalystcenter</code></td>
-<td>Catalyst Center</td>
-<td><code>netascode/nac-catalystcenter/catalystcenter</code></td>
-</tr>
-<tr>
-<td><code>nac-ise</code></td>
-<td>Cisco ISE</td>
-<td><code>netascode/nac-ise/ise</code></td>
+<td>Cisco Modeling Lab</td>
+<td><a href="https://198.18.128.27">https://198.18.128.27</a></td>
+<td><code>admin</code></td>
+<td><code>C1sco12345</code></td>
 </tr>
 </tbody>
 </table>
-<p>Each module accepts <strong>YAML data files</strong> as its only input. You describe <em>what</em> you want the network to look like; the module handles <em>how</em> to get there via the provider API.</p>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../assets/nac_architecture.png" data-desc-position="bottom"><img alt="Net-as-Code Architecture" src="../assets/nac_architecture.png"></a></p>
-<h2 id="the-data-logic-separation">The Data / Logic Separation<a class="headerlink" href="#the-data-logic-separation" title="Permanent link">¶</a></h2>
-<p>The central idea is a clean split between <strong>data</strong> and <strong>execution logic</strong>:</p>
+<h2 id="step-2-edge01-configuration">Step 2: EDGE01 Configuration<a class="headerlink" href="#step-2-edge01-configuration" title="Permanent link">¶</a></h2>
+<p>EDGE01 will require sub steps, pleae follow them in the order below:</p>
+<p><strong>Step 2.1 - CTS on EDGE01</strong>
+Configure CTS creds in EXEC mode, since it is EXEC, we can push through SAC</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>cts credentials id EDGE01.cisco.eu password C1sco12345
+</span></code></pre></div>
+<p><strong>Step 2.2 - DHCP on EDGE01</strong></p>
+<p>Configure EDGE switch to be a local DHCP server</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>conf t
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>ip dhcp excluded-address vrf Campus 192.168.100.1 192.168.100.9
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>ip dhcp pool EMPLOYEES
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a> vrf Campus
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a> network 192.168.100.0 255.255.255.0
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a> default-router 192.168.100.1
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a> lease 0 8
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>end
+</span></code></pre></div>
+<p><strong>Step 2.3 - Mitigating ARP on Laptop Endpoint</strong>
+This is the manual workaround to mitigate ARP issue with CML C9KV</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo<span class="w"> </span>ip<span class="w"> </span>neigh<span class="w"> </span>del<span class="w"> </span><span class="m">192</span>.168.100.1<span class="w"> </span>dev<span class="w"> </span>ens2<span class="w"> </span><span class="m">2</span>&gt;/dev/null
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>sudo<span class="w"> </span>ip<span class="w"> </span>addr<span class="w"> </span>flush<span class="w"> </span>dev<span class="w"> </span>ens2
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>sudo<span class="w"> </span>ip<span class="w"> </span>neigh<span class="w"> </span>flush<span class="w"> </span>dev<span class="w"> </span>ens2
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>sudo<span class="w"> </span>dhcpcd<span class="w"> </span>-k<span class="w"> </span>ens2<span class="w"> </span><span class="m">2</span>&gt;/dev/null
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>sudo<span class="w"> </span>dhcpcd<span class="w"> </span>-d<span class="w"> </span>-4<span class="w"> </span>ens2
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>sudo<span class="w"> </span>ip<span class="w"> </span>neigh<span class="w"> </span>replace<span class="w"> </span><span class="m">192</span>.168.100.1<span class="w"> </span>lladdr<span class="w"> </span><span class="m">00</span>:00:0c:9f:f6:f2<span class="w"> </span>dev<span class="w"> </span>ens2<span class="w"> </span>nud<span class="w"> </span>permanent
+</span></code></pre></div>
+<p>Confirm IP address was received from DHCP</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>ip<span class="w"> </span>addr<span class="w"> </span>show<span class="w"> </span>ens2
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>ip<span class="w"> </span>route
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>ip<span class="w"> </span>neigh<span class="w"> </span>show<span class="w"> </span>
+</span></code></pre></div>
+<p><strong>Step 2.4 - Verify IP address on EDGE01</strong></p>
+<p>Verify IP address was received from DHCP</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>show device-tracking database interface Gi1/0/1
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>show lisp instance-id 4100 ipv4 database | inc 192.168.100.10 # Use IP received from DHCP
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>show ip cef vrf Campus 192.168.100.10 # Use IP received from DHCP
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>show adjacency Vlan1021 detail | begin 192.168.100.10 # Use IP received from DHCP
+</span></code></pre></div>
+<p><strong>Step 2.5 - Configure SGT on EDGE01</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>conf t
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>cts role-based sgt-map 192.168.100.10 sgt 40 
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>end
+</span></code></pre></div>
+<p>Verify SGT was configured</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>show cts role-based permissions
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>show cts role-based sgt-map all
+</span></code></pre></div>
+<h2 id="step-3-edge02-configuration">Step 3: EDGE02 Configuration<a class="headerlink" href="#step-3-edge02-configuration" title="Permanent link">¶</a></h2>
+<p>EDGE02 will require sub steps, pleae follow them in the order below:</p>
+<p><strong>Step 3.1 - CTS on EDGE02</strong>
+Configure CTS creds in EXEC mode, since it is EXEC, we can push through SAC</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>cts credentials id EDGE02.cisco.eu password C1sco12345
+</span></code></pre></div>
+<p><strong>Step 3.2 - DHCP on EDGE02</strong></p>
+<p>Configure EDGE switch to be a local DHCP server</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>conf t
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>ip dhcp excluded-address vrf Campus 192.168.110.1 192.168.110.9
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>ip dhcp pool SERVERS
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a> vrf Campus
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a> network 192.168.110.0 255.255.255.0
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a> default-router 192.168.110.1
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a> lease 0 8
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>end
+</span></code></pre></div>
+<p><strong>Step 3.3 - Mitigating ARP on Server Endpoint</strong>
+This is the manual workaround to mitigate ARP issue with CML C9KV</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>sudo<span class="w"> </span>ip<span class="w"> </span>neigh<span class="w"> </span>del<span class="w"> </span><span class="m">192</span>.168.110.1<span class="w"> </span>dev<span class="w"> </span>ens2<span class="w"> </span><span class="m">2</span>&gt;/dev/null
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>sudo<span class="w"> </span>ip<span class="w"> </span>addr<span class="w"> </span>flush<span class="w"> </span>dev<span class="w"> </span>ens2
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>sudo<span class="w"> </span>ip<span class="w"> </span>neigh<span class="w"> </span>flush<span class="w"> </span>dev<span class="w"> </span>ens2
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>sudo<span class="w"> </span>dhcpcd<span class="w"> </span>-k<span class="w"> </span>ens2<span class="w"> </span><span class="m">2</span>&gt;/dev/null
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>sudo<span class="w"> </span>dhcpcd<span class="w"> </span>-d<span class="w"> </span>-4<span class="w"> </span>ens2
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>sudo<span class="w"> </span>ip<span class="w"> </span>neigh<span class="w"> </span>replace<span class="w"> </span><span class="m">192</span>.168.110.1<span class="w"> </span>lladdr<span class="w"> </span><span class="m">00</span>:00:0c:9f:f5:82<span class="w"> </span>dev<span class="w"> </span>ens2<span class="w"> </span>nud<span class="w"> </span>permanent
+</span></code></pre></div>
+<p>Confirm IP address was received from DHCP</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>ip<span class="w"> </span>addr<span class="w"> </span>show<span class="w"> </span>ens2
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>ip<span class="w"> </span>route
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>ip<span class="w"> </span>neigh<span class="w"> </span>show
+</span></code></pre></div>
+<p><strong>Step 3.4 - Verify IP address on EDGE02</strong></p>
+<p>Verify IP address was received from DHCP</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>show device-tracking database interface Gi1/0/1
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>show lisp instance-id 4100 ipv4 database | inc 192.168.110.10 # Use IP received from DHCP
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>show ip cef vrf Campus 192.168.110.10 # Use IP received from DHCP
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>show adjacency Vlan1022 detail | begin 192.168.100.10 # Use IP received from DHCP
+</span></code></pre></div>
+<p><strong>Step 3.5 - Configure SGT on EDGE02</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>conf t
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>cts role-based sgt-map 192.168.110.10 sgt 20
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>end
+</span></code></pre></div>
+<p>Verify SGT was configured</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>show cts role-based permissions
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>show cts role-based sgt-map all
+</span></code></pre></div>
+<h2 id="step-4-fiab-configuration">Step 4: FIAB Configuration<a class="headerlink" href="#step-4-fiab-configuration" title="Permanent link">¶</a></h2>
+<p>Configure CTS creds in EXEC mode, since it is EXEC, we can push through SAC</p>
+<p><strong>Step 4.1 - CTS on FIAB</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>cts credentials id FIAB.cisco.eu password C1sco12345
+</span></code></pre></div>
+<p><strong>Step 4.2 - DHCP Server on FIAB</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>conf t
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>ip dhcp excluded-address vrf IoT 192.168.200.1 192.168.200.9
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>ip dhcp pool CAMERAS
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a> vrf IoT
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a> network 192.168.200.0 255.255.255.0
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a> default-router 192.168.200.1
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a> lease 0 8
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>end
+</span></code></pre></div>
+<p><strong>Step 4.3 - Mitigating ARP on Camera Endpoint</strong>
+This is the manual workaround to mitigate ARP issue with CML C9KV</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>sudo<span class="w"> </span>ip<span class="w"> </span>neigh<span class="w"> </span>del<span class="w"> </span><span class="m">192</span>.168.200.1<span class="w"> </span>dev<span class="w"> </span>ens2<span class="w"> </span><span class="m">2</span>&gt;/dev/null
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>sudo<span class="w"> </span>ip<span class="w"> </span>addr<span class="w"> </span>flush<span class="w"> </span>dev<span class="w"> </span>ens2
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>sudo<span class="w"> </span>ip<span class="w"> </span>neigh<span class="w"> </span>flush<span class="w"> </span>dev<span class="w"> </span>ens2
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>sudo<span class="w"> </span>dhcpcd<span class="w"> </span>-k<span class="w"> </span>ens2<span class="w"> </span><span class="m">2</span>&gt;/dev/null
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>sudo<span class="w"> </span>dhcpcd<span class="w"> </span>-d<span class="w"> </span>-4<span class="w"> </span>ens2
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>sudo<span class="w"> </span>ip<span class="w"> </span>neigh<span class="w"> </span>replace<span class="w"> </span><span class="m">192</span>.168.200.1<span class="w"> </span>lladdr<span class="w"> </span><span class="m">00</span>:00:0c:9f:f5:33<span class="w"> </span>dev<span class="w"> </span>ens2<span class="w"> </span>nud<span class="w"> </span>permanent
+</span></code></pre></div>
+<p>Confirm IP address was received from DHCP</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>ip<span class="w"> </span>addr<span class="w"> </span>show<span class="w"> </span>ens2
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>ip<span class="w"> </span>route
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>ip<span class="w"> </span>neigh<span class="w"> </span>show
+</span></code></pre></div>
+<p><strong>Step 4.4 - Verify IP address on FIAB</strong></p>
+<p>Verify IP address was received from DHCP</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>show device-tracking database interface Gi1/0/1
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>show lisp instance-id 4099 ipv4 database | inc 192.168.200.10 # Use IP received from DHCP
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>show ip cef vrf IoT 192.168.200.10 # Use IP received from DHCP
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>show adjacency Vlan1021 detail | begin 192.168.200.10 # Use IP received from DHCP
+</span></code></pre></div>
+<p><strong>Step 4.5 - Configure SGT on FIAB</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>conf t
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>cts role-based sgt-map 192.168.200.10 sgt 30
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>end
+</span></code></pre></div>
+<p>Verify SGT was configured</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>show cts role-based permissions
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>show cts role-based sgt-map all
+</span></code></pre></div>
+<p>Once these steps are completed, you will be able to ping the endpoints and and validate following use case defined per the policy:</p>
 <ul>
-<li><strong>Data</strong> — human-readable YAML files that describe the desired state of the network. These are the files you edit when you want to make a change.</li>
-<li><strong>Logic</strong> — the Terraform module code. This is maintained by Cisco and is consumed as a versioned dependency. You do not modify it.</li>
+<li>Ping from Laptop to Server will be successful</li>
+<li>Ping from Laptop to Camera will be failed</li>
+<li>Ping from Server to Camera will be successful</li>
 </ul>
-<p>This separation means that network engineers can manage their infrastructure by editing YAML files, without needing to learn the Terraform provider schema or write HCL.</p>
-<h3 id="example-catalyst-center-as-code">Example: Catalyst Center as Code<a class="headerlink" href="#example-catalyst-center-as-code" title="Permanent link">¶</a></h3>
-<p><strong>Without data/logic separation</strong> — you write Terraform resource blocks directly:</p>
-<div class="language-hcl highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kr">resource</span><span class="w"> </span><span class="nc">"catalystcenter_area"</span><span class="w"> </span><span class="nv">"example"</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="na">name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s2">"Area1"</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="na">parent_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Global"</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">}</span>
-</span></code></pre></div>
-<p><strong>With data/logic separation</strong> — you write a YAML data file:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># sites.nac.yaml</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">catalyst_center</span><span class="p">:</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">sites</span><span class="p">:</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">areas</span><span class="p">:</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Area1</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">        </span><span class="nt">parent_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Global</span>
-</span></code></pre></div>
-<p>And a minimal <code>main.tf</code> that points the module at your YAML files:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>module "catalyst_center" {
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  source  = "netascode/nac-catalystcenter/catalystcenter"
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  version = "0.3.0"
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>  yaml_directories = ["data/"]
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>}
-</span></code></pre></div>
-<p>To add a second area, you add one entry to the YAML file and run <code>terraform apply</code>. You never touch <code>main.tf</code>.</p>
-<h2 id="the-net-as-code-workflow">The Net-as-Code Workflow<a class="headerlink" href="#the-net-as-code-workflow" title="Permanent link">¶</a></h2>
-<p>Every domain in this lab follows the same five-step workflow:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>  1. Validate    →  Lint YAML, run schema checks (nac-validate)
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  2. Plan        →  terraform plan  (show what will change)
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  3. Deploy      →  terraform apply  (apply changes to the controller)
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>  4. Test        →  Post-change compliance checks (nac-test)
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>  5. Notify      →  Send Webex notification
-</span></code></pre></div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Some of the repositories may have an additional <code>destroy</code> step to clean up the resources after the test is complete. For production environments, it is recommended to modify the <code>*.nac.yaml</code> files to remove the resources and trigger the pipeline. The apply process will in-turn trigger the destroy process to clean up the resources.</p>
-</div>
-<p><a class="glightbox" data-type="image" data-width="100%" data-height="auto" href="../assets/nac_workflow.png" data-desc-position="bottom"><img alt="Net-as-Code Workflow" src="../assets/nac_workflow.png"></a></p>
-<p>Steps 1 through 5 are automated in a CI/CD pipeline (Jenkins or GitLab CI) triggered by a Git push. This means a network change goes through the same pull-request and pipeline gates as a software change.</p>
-<h2 id="repository-structure">Repository Structure<a class="headerlink" href="#repository-structure" title="Permanent link">¶</a></h2>
-<p>Each domain repository in this lab follows the same layout:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>&lt;domain&gt;-repo/
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>├── main.tf                  # Terraform entry point — do not modify
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>├── data/
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>│   └── *.nac.yaml           # Your data model files — edit these
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>├── defaults/                # Default values for the module
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>├── schemas/                 # JSON Schema files for YAML validation
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>├── validation/              # pytest-based semantic validation tests
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>├── .gitlab-ci.yml           # CI/CD pipeline definition
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>└── README.md
-</span></code></pre></div>
-<div class="admonition tip">
-<p class="admonition-title">Key Insight</p>
-<p>In day-to-day operations you only touch files inside <code>data/</code>. Everything else is infrastructure that the pipeline uses automatically.</p>
-</div>
-<h2 id="the-four-domain-modules-in-this-lab">The Four Domain Modules in This Lab<a class="headerlink" href="#the-four-domain-modules-in-this-lab" title="Permanent link">¶</a></h2>
-<h3 id="aci-as-code">ACI as Code<a class="headerlink" href="#aci-as-code" title="Permanent link">¶</a></h3>
-<p>Manages the full ACI policy model: tenants, VRFs, Bridge Domains, EPGs, contracts, L3Outs, access policies, and node/interface policies. Data files describe the ACI object model in YAML; the <code>nac-aci</code> module translates them to APIC REST API calls via the Terraform ACI provider.</p>
-<h3 id="sd-wan-as-code">SD-WAN as Code<a class="headerlink" href="#sd-wan-as-code" title="Permanent link">¶</a></h3>
-<p>Manages SD-WAN feature templates, device templates, and policies. Data files describe VPN configurations, interface templates, and tunnel settings; the <code>nac-sdwan</code> module pushes them to SD-WAN Manager.</p>
-<h3 id="catalyst-center-as-code">Catalyst Center as Code<a class="headerlink" href="#catalyst-center-as-code" title="Permanent link">¶</a></h3>
-<p>Manages SDA site hierarchy, IP pools, network settings, fabric provisioning (fabric sites, border/edge roles, L3 VNs, anycast gateways), and device assignments. The <code>nac-catalystcenter</code> module communicates with Catalyst Center's Intent API.</p>
-<h3 id="ise-as-code">ISE as Code<a class="headerlink" href="#ise-as-code" title="Permanent link">¶</a></h3>
-<p>Manages TrustSec Security Groups (SGTs), Security Group ACLs (SGACLs), the policy matrix, network access policy sets, and network resources (network devices, network device groups). The <code>nac-ise</code> module communicates with ISE's ERS and OpenAPI endpoints.</p>
-<h2 id="what-you-will-build">What You Will Build<a class="headerlink" href="#what-you-will-build" title="Permanent link">¶</a></h2>
-<p>By the end of this lab, you will have configured an end-to-end multi-domain policy:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>  [ACI Fabric]              [Campus SDA]              [WAN]
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  PROD Tenant               Bld A — Fabric A           SD-WAN VPN30
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  BD-Servers / BD-Web  ←→  EmployeesPool / Servers ←→  cEdge-01/02/03
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>  L3OUT-SDWAN-PROD          Bld B — Fabric B
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>                            IoT Pool / Cameras
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>  [ISE TrustSec]
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>  SGT: IT_Admin=40  Servers=20  Cameras=30
-</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>  Policy: IT_Admin→Servers: PERMIT_ANY
-</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>          IT_Admin→Cameras: PERMIT_CAMERA_STREAM
-</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>          Default: LTRXAR_DENY_IP_LOG
-</span></code></pre></div>
-<p>All of this is driven from YAML data files checked into Git, deployed through a CI/CD pipeline, and enforced by post-change compliance checks.</p>
+<p><strong>Continue to the <a href="../conclusion/">Conclusion</a></strong></p>
 
 
 
@@ -1321,44 +1114,6 @@
       
         <footer class="md-footer">
   
-    
-      
-      <nav class="md-footer__inner md-grid" aria-label="Footer">
-        
-          
-          <a href="../overview/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Overview">
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
-            </div>
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              <div class="md-ellipsis">
-                Overview
-              </div>
-            </div>
-          </a>
-        
-        
-          
-          <a href="../lab1_aci/" class="md-footer__link md-footer__link--next" aria-label="Next: Lab 1 — ACI as Code">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              <div class="md-ellipsis">
-                Lab 1 — ACI as Code
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
-            </div>
-          </a>
-        
-      </nav>
     
   
   <div class="md-footer-meta md-typeset">
