@@ -163,7 +163,7 @@ git push gitlab main
 ```
 
 !!! important
-    Wait for the Catalyst Center pipeline to complete its **validate** and **plan** stages before proceeding. Don't trigger the deploy yet. The multidomain orchestrator will handle the deployment sequence.
+    Wait for the Catalyst Center and SDWAN pipelines to complete its **validate** and **plan** stages before proceeding. Don't trigger the deploy yet. The multidomain orchestrator will handle the deployment sequence.
 
 ## Step 5: Explore the Catalyst Center Multi-Domain Data
 
@@ -276,19 +276,38 @@ Navigate to **Provision → Fabric Sites → Bld B → Border Devices**. Confirm
 
 Open SD-WAN Manager: `https://198.18.185.11` (admin / C1sco12345).
 
-Navigate to **Monitor → Devices**. Select `C-EDGE-01` and verify the BGP session toward `10.100.50.1` (`FIAB.cisco.eu`) is `Established`.
+Navigate to **Monitor → Devices → C-EDGE-01 → Events**. Verify the BGP session toward `10.100.50.1` (`FIAB.cisco.eu`) is `Established`.
 
-Select `C-EDGE-02` and verify the BGP session toward `10.100.30.1` (`BORDER.cisco.eu`) is `Established`.
+Navigate to **Monitor → Devices → C-EDGE-02 → Events**. Verify the BGP session toward `10.100.30.1` (`BORDER.cisco.eu`) is `Established`.
+
+### Catalyst Center Phase 4: Push CTS Bootstrap Template
+
+In your `ltrxar-3100-catc` local clone, open `data/multidomain_devices.nac.yaml` and uncomment the `dayn_templates:` block for `BORDER.cisco.eu` and `FIAB.cisco.eu`.
+
+```yaml
+        # Phase 4: uncomment to push CTS bootstrap template
+        # dayn_templates:
+        #   regular:
+        #     - name: cts-bootstrap
+        #       variables:
+        #         - name: device_name
+        #           value: BORDER.cisco.eu
+        #         - name: cts_password
+        #           value: C1sco12345
+```
+
+Once the changes are made, commit these changes and push to GitLab:
+```bash
+git add data/multidomain_devices.nac.yaml
+git commit -m "Push CTS bootstrap template for SDA Edge devices"
+git push gitlab main
+```
+
+A new pipeline run starts automatically. The **plan** stage shows exactly one new resource. Trigger the **deploy** job in Catalyst Center repository and verify the CTS bootstrap template is pushed to the fabric devices.
 
 ### ISE — TrustSec Propagation
 
-Navigate to **Work Centers → TrustSec → SXP** and verify that the static IP-SGT mappings are being propagated to the network devices.
-
-## Step 11: Simulate an End-to-End Policy Change
-
-To demonstrate the full pipeline operational model, add a new `PCI` zone (SGT 50) isolated from the `IT_Admin` (SGT 40) and `Cameras` (SGT 30) zones.
-
-1. In your `ltrxar-3100-ise` local clone, open `data/trust_sec.nac.yaml` and add:
+1. In your `ltrxar-3100-ise` local clone, open `data/trust_sec.nac.yaml` and add the following:
 
 ```yaml
 security_groups:

@@ -15,15 +15,22 @@ After completing this lab, you will be able to:
 
 ```
 ltrxar-3100-sdwan/
-├── main.tf                              # Terraform entry point
+├── main.tf                                           # Terraform entry point
 ├── data/
-│   └── edge_feature_templates.nac.yaml  # VPN and interface feature templates
-├── defaults/                            # Default values for the module
-├── schemas/                             # JSON Schema for YAML validation
-├── templates/                           # Jinja2 test templates for post-deploy checks
-├── validation/                          # pytest-based semantic tests
-└── .gitlab-ci.yml                       # CI/CD pipeline definition
+│   └── edge_feature_templates.nac.yaml               # Base feature templates
+├── backup_data/
+│   ├── multidomain_edge_feature_templates.nac.yaml   # Multi-domain feature templates
+│   ├── multidomain_edge_device_templates.nac.yaml    # Multi-domain device templates
+│   └── multidomain_sites.nac.yaml                    # Multi-domain sites
+├── defaults/                                         # Default values for the module
+├── schemas/                                          # JSON Schema for YAML validation
+├── templates/                                        # Jinja2 test templates for post-deploy checks
+├── validation/                                       # pytest-based semantic tests
+└── .gitlab-ci.yml                                    # CI/CD pipeline definition
 ```
+
+!!! note
+    The `backup_data/` directory contains the feature templates and device templates that will be activated in Lab 5 (Multi-Domain Integration). In this lab, you will only deploy the base feature templates.
 
 ## Step 1: Connect to the Windows Workstation
 

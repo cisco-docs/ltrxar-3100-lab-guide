@@ -17,4 +17,5 @@ Welcome to **LTRXAR-3100**. This lab guide walks you through building an end-to-
 | [Lab 3 — Catalyst Center as Code](lab3_catc.md) | Automate SDA fabric provisioning via Catalyst Center |
 | [Lab 4 — ISE as Code](lab4_ise.md) | Automate TrustSec policy and network access rules in ISE |
 | [Lab 5 — Multi-Domain Integration](lab5_multidomain.md) | Run a unified pipeline across all three domains |
+| [Lab 6 (Optional) — End-to-End Testing](lab6_optional_end_to_end_testing.md) | Optional end-to-end testing of the multi-domain integration |
 | [Conclusion](conclusion.md) | Summary and related Cisco Live sessions |

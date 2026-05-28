@@ -55,11 +55,11 @@ The Cisco Modeling Lab environment hosts the following virtual network devices:
     Each workstation has a unique dCloud **Session ID** and **VPN credentials**. You will have to VPN to your virtual lab in order to access all the components of the lab environment.
 
 
-**Step 1 — Connect to your dCloud Session via VPN**
+## Step 1: Connect to your dCloud Session via VPN
 
 Using the **Instructor-Led Lab Assistant**, establish a VPN connection to your assigned dCloud Session. If you do not know your dCloud Session ID, contact your proctor.
 
-**Step 2 — RDP to the Windows Workstation**
+## Step 2: RDP to the Windows Workstation
 
 From your local machine, open a Remote Desktop Protocol (RDP) session to the Windows VM:
 
@@ -83,16 +83,16 @@ Confirm that the RDP session opens successfully before proceeding.
     If the CML lab is not powered in, click on the triangle icon to power it on. By the time you start pushing the configuration to the CML lab, it will be powered on.
 
 
-## Getting Started
+## Step 3: Getting Started
 
 If you are not aware of it, as an option, read through the [Introduction](introduction.md) to understand the Net-as-Code methodology before starting the labs. Additional documentation is available on the [Net-as-Code website](https://netascode.cisco.com/).
 
 The labs are designed to be completed in order:
 
-1. **Lab 1 — ACI as Code** — Start here to learn the data model pattern
-2. **Lab 2 — SD-WAN as Code** — Apply the same pattern to SD-WAN feature templates
-3. **Lab 3 — Catalyst Center as Code** — Extend to SDA fabric provisioning
-4. **Lab 4 — ISE as Code** — Configure TrustSec policy
-5. **Lab 5 — Multi-Domain Integration** — Run the unified cross-domain pipeline
+1. **Lab 1: ACI as Code** - Start here to learn the data model pattern
+2. **Lab 2: SD-WAN as Code** - Apply the same pattern to SD-WAN feature templates
+3. **Lab 3: Catalyst Center as Code** - Extend to SDA fabric provisioning
+4. **Lab 4: ISE as Code** - Configure TrustSec policy
+5. **Lab 5: Multi-Domain Integration** - Run the unified cross-domain pipeline
 
 Each lab repository is publicly available on GitHub. You will clone the public repository to your workstation as we progress in the labs. Explore the code, then push it to the GitLab instance in the lab environment where the CI/CD pipeline will deploy the configuration automatically.

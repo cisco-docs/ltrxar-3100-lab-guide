@@ -41,6 +41,8 @@ ltrxar-3100-catalystcenter/
 ├── data/
 │   ├── sites.nac.yaml              # Site hierarchy (areas, buildings, floors)
 │   ├── network_settings.nac.yaml   # IP pools, AAA settings, telemetry
+│   ├── network_profiles.nac.yaml   # Network profiles
+│   ├── templates.nac.yaml          # Templates for projects and templates
 │   └── templates/                  # Day-N CLI templates
 ├── backup_data/                    # Multi-domain files (used in Lab 5)
 │   ├── multidomain_fabric.nac.yaml # Fabric sites, L3 VNs, anycast gateways, L3 handoffs
@@ -52,7 +54,8 @@ ltrxar-3100-catalystcenter/
 └── .gitlab-ci.yml                  # CI/CD pipeline definition
 ```
 
-**Note:** The `backup_data/` directory contains the fabric provisioning and device inventory files that will be activated in Lab 5 (Multi-Domain Integration). In this lab, you will only deploy the site hierarchy and network settings.
+!!! note
+    The `backup_data/` directory contains the fabric provisioning and device inventory files that will be activated in Lab 5 (Multi-Domain Integration). In this lab, you will only deploy the site hierarchy, network settings, and network profiles.
 
 ## Step 1: Connect to the Windows Workstation
 

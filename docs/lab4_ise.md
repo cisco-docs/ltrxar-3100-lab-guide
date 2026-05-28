@@ -209,10 +209,10 @@ ise:
         ips:
           - ip: 198.18.140.31
         radius:
-          shared_secret: __PLACEHOLDER_SHARED_SECRET__
+          shared_secret: C1sco12345
         trust_sec:
-          device_id: SDA-BORDER
-          device_password: __PLACEHOLDER_DEVICE_PASSWORD__
+          device_id: BORDER.cisco.eu
+          device_password: C1sco12345
           send_configuration_to_device: true
           send_configuration_to_device_using: ENABLE_USING_COA
           download_sgacl_lists_every_x_seconds: 60
@@ -338,7 +338,7 @@ Log in with `admin` / `C1sco12345`.
 1. Navigate to **Work Centers → TrustSec → Components → Security Groups**. Confirm `IT_Admin` (SGT 40), `Servers` (SGT 20), and `Cameras` (SGT 30) exist.
 2. Navigate to **Work Centers → TrustSec → Components → Security Group ACLs**. Click on `PERMIT_CAMERA_STREAM` and confirm the ACL content.
 3. Navigate to **Work Centers → TrustSec → TrustSec Policy → Egress Policy → Matrix**. Confirm the four matrix entries are in place.
-4. Navigate to **Administration → Network Resources → Network Devices**. Confirm `SDA-BORDER`, `SDA-FIAB`, `SDA-EDGE-01`, and `SDA-EDGE-02` are registered. (Note: cEdge devices are not registered as they use CTS inline tagging).
+4. Navigate to **Administration → Network Resources → Network Devices**. Confirm `BORDER.cisco.eu`, `FIAB.cisco.eu`, `EDGE01.cisco.eu`, and `EDGE02.cisco.eu` are registered. (Note: cEdge devices are not registered as they use CTS inline tagging).
 
 <!-- ![ISE TrustSec Matrix](./assets/ise_matrix.png) -->
 
@@ -349,7 +349,7 @@ Open `.gitlab-ci.yml`. The ISE pipeline has a few notable characteristics compar
 ```yaml
 image:
   name: danischm/nac:0.1.5   # Pinned version for ISE provider compatibility
-  pull_policy: if-not-present
+  pull_policy: always
 
 stages:
   - validate
@@ -359,6 +359,7 @@ stages:
 
 variables:
   GODEBUG: net.ipv6=off        # Disables IPv6 (ISE provider limitation)
+  GIT_SSL_NO_VERIFY: "true"
 
 before_script:
   - cp /etc/resolv.conf /tmp/resolv.conf

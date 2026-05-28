@@ -11,6 +11,7 @@ Over the five labs in this session you built a complete, multi-domain automation
 | Lab 3 | Catalyst Center | Two-fabric SDA hierarchy with Campus and IoT VNs and anycast gateways |
 | Lab 4 | ISE | TrustSec SGTs, SGACLs, policy matrix, and network device registration |
 | Lab 5 | Multi-Domain | BGP transit, L3 handoffs (CATC borders ↔ SD-WAN edges), device templates |
+| Lab 6 | End-to-End Testing | End-to-end testing of the multi-domain integration |
 
 Every configuration object was defined in a YAML data file, validated against a JSON Schema, planned with `terraform plan`, and deployed with `terraform apply` — reproducibly and without manual GUI interaction.
 
@@ -35,6 +36,7 @@ To continue developing your Net-as-Code skills:
 
 ## Related Sessions at Cisco Live
 
+- [LTRENS-3751](https://www.ciscolive.com/emea/learn/session-catalog.html?search=LTRENS-3751) — Automating SD-Access Fabric Deployment with Cisco Catalyst Center, ISE, and Terraform
 - [LTRATO-2223](https://www.ciscolive.com/emea/learn/session-catalog.html?search=LTRATO-2223) — FastForward SD-WAN Deployment and Management with SD-WAN as Code
 - [LTRDCN-2459](https://www.ciscolive.com/emea/learn/session-catalog.html?search=LTRDCN-2459) — Cross-Technology Automation of ACI and FMC with Network-as-Code from Day 0 to Day 2
 - [TECSEC-2834](https://www.ciscolive.com/emea/learn/session-catalog.html?search=TECSEC-2834) — Optimizing Cisco Security: Automate Provisioning and Configuration with Ansible and Terraform

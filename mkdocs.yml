@@ -11,8 +11,8 @@ site_dir: site
 
 theme:
   name: material
-  logo: assets/ltrxar_3100_logo.png
-  favicon: assets/ltrxar_3100_logo.png
+  logo: assets/cisco_logo.png
+  favicon: assets/cisco_logo.png
   language: en
 
   palette:
@@ -140,4 +140,4 @@ extra:
   generator: false
 
 copyright: >
-  Copyright &copy; 2025 Cisco Systems, Inc. — LTRXAR-3100 Cisco Live Lab Guide
+  Copyright &copy; 2026 Cisco Systems, Inc. — LTRXAR-3100 Cisco Live Lab Guide
