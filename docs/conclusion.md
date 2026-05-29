@@ -36,7 +36,7 @@ To continue developing your Net-as-Code skills:
 
 ## Related Sessions at Cisco Live
 
-- [LTRENS-3751](https://www.ciscolive.com/emea/learn/session-catalog.html?search=LTRENS-3751) — Automating SD-Access Fabric Deployment with Cisco Catalyst Center, ISE, and Terraform
+- [LTRENS-3751](https://www.ciscolive.com/emea/learn/session-catalog.html?search=LTRENS-3751) — SD-Access as Code
 - [LTRATO-2223](https://www.ciscolive.com/emea/learn/session-catalog.html?search=LTRATO-2223) — FastForward SD-WAN Deployment and Management with SD-WAN as Code
 - [LTRDCN-2459](https://www.ciscolive.com/emea/learn/session-catalog.html?search=LTRDCN-2459) — Cross-Technology Automation of ACI and FMC with Network-as-Code from Day 0 to Day 2
 - [TECSEC-2834](https://www.ciscolive.com/emea/learn/session-catalog.html?search=TECSEC-2834) — Optimizing Cisco Security: Automate Provisioning and Configuration with Ansible and Terraform

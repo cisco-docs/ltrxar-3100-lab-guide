@@ -130,6 +130,7 @@ nav:
     - Lab 3 — Catalyst Center as Code: lab3_catc.md
     - Lab 4 — ISE as Code: lab4_ise.md
     - Lab 5 — Multi-Domain Integration: lab5_multidomain.md
+    - Lab 6 (Optional) — End-to-End Testing: lab6_optional_end_to_end_testing.md
   - Conclusion: conclusion.md
 
 extra:
