@@ -49,6 +49,8 @@ The Cisco Modeling Lab environment hosts the following virtual network devices:
 | SD-WAN Edge 1–3 | cEdge | 20.15.1 |
 | Catalyst 9000 Switch 1–3 | SDA Fabric | IOS-XE |
 
+![CML Topology](./assets/cml_topology_light.png)
+
 ## Lab Access
 
 !!! important
